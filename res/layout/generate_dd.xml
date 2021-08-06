@@ -225,6 +225,7 @@
                 android:layout_below="@+id/drive_details"
                 android:layout_marginTop="@dimen/header_grnt_padding_five"
                 android:hint="@string/driver_name"
+                android:digits="0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ "
                 android:inputType="text|textCapCharacters" />
 
             <EditText
@@ -236,6 +237,7 @@
                 android:layout_gravity="center_vertical"
                 android:layout_marginTop="@dimen/header_grnt_padding_five"
                 android:hint="@string/driver_father_name"
+                android:digits="0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ "
                 android:inputType="text|textCapCharacters" />
 
             <LinearLayout
@@ -458,6 +460,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/header_grnt_padding_five"
                     android:hint=""
+                    android:digits="0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ "
                     android:inputType="textCapCharacters"></EditText>
 
                 <EditText
@@ -508,6 +511,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/header_grnt_padding_five"
                     android:hint="@string/dd_name"
+                    android:digits="0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ "
                     android:inputType="textCapCharacters"></EditText>
 
                 <EditText

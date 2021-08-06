@@ -1458,7 +1458,7 @@ public class GenerateDrunkDriveCase extends Activity implements OnClickListener,
                     "" + btn_offence_date.getText().toString().toUpperCase(), ""+smsMode);*/
 
             ServiceHelper.sendOTPtoMobile(completeVehicle_num_send, et_driver_contact_no.getText().toString().trim(),
-                    "" + btn_offence_date.getText().toString().toUpperCase(), smsMode,"TD");
+                    "" + btn_offence_date.getText().toString().toUpperCase(), smsMode, "TD");
 
             return null;
         }
@@ -1580,7 +1580,7 @@ public class GenerateDrunkDriveCase extends Activity implements OnClickListener,
                 /*dp_offence_date.getDatePicker().setSpinnersShown(false);
                 dp_offence_date.getDatePicker().setCalendarViewShown(true);*/
                 dp_offence_date.getDatePicker().setMinDate(calendar.getTimeInMillis());
-               // dp_offence_date.getDatePicker().setMinDate();
+                // dp_offence_date.getDatePicker().setMinDate();
                 return dp_offence_date;
             case OFFENCE_TIME_PICKER:
 
@@ -2713,7 +2713,7 @@ public class GenerateDrunkDriveCase extends Activity implements OnClickListener,
                         "" + vhle_cat_send, "" + vhle_catMain_send, "" + rtaresponse,
                         "" + et_address.getText().toString().trim(), "" + et_city.getText().toString().trim(),
                         "" + Dashboard.UNIT_CODE, "" + Dashboard.UNIT_NAME, "" + cadreCd, "" + cadre,
-                        " " + final_image_data_tosend, "" + IMEI_send, "" + latitude, "" + longitude, "" + macAddress,
+                        " " + final_image_data_tosend, "" + IMEI_send, "" + latitude, "" + longitude, "" + Drunk_Drive.calbrition_Date,
                         "" + simID, "" + anlyser_id_send, "" + Drunk_Drive.licence_status, "" + liquor_code + "|" + barNAME,
                         "" + liquor_Address, "" + professionCode + "|" + profession_name,
                         "" + profession_Addres + "|" + emailID + "|" + identification_mark, Drunk_Drive.vehCatgryCd);
@@ -3274,19 +3274,19 @@ public class GenerateDrunkDriveCase extends Activity implements OnClickListener,
 
             sb_detaneditems_send.delete(0, sb_detaneditems_send.length());
             if (chck_detainedItems_rc.isChecked()) {
-                sb_detaneditems_send.append("2:RC@");
+                sb_detaneditems_send.append("02:RC@");
             }
 
             if (chck_detainedItems_vhcle.isChecked()) {
-                sb_detaneditems_send.append("3:VEHICLE@");
+                sb_detaneditems_send.append("03:VEHICLE@");
             }
 
             if (chck_detainedItems_licence.isChecked()) {
-                sb_detaneditems_send.append("1:LICENCE@");
+                sb_detaneditems_send.append("01:LICENCE@");
             }
 
             if (chck_detainedItems_permit.isChecked()) {
-                sb_detaneditems_send.append("4:PERMIT@");
+                sb_detaneditems_send.append("04:PERMIT@");
             }
 
             /* THIRD SCREEN VALUES */

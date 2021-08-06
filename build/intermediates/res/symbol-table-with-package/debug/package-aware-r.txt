@@ -2211,6 +2211,7 @@ id fl_web
 id footer
 id forever
 id fueltype_layout
+id fuelyout
 id full_pending_layout
 id get_aadhaar
 id get_details
@@ -2264,6 +2265,7 @@ id img_logo
 id imgbtn_browseimage_dd3_xml
 id imgbtn_capture_dd3_xml
 id imgbtn_logout_dashboard_xml
+id imgvDL_camera_capture
 id imgv_aadhar_photo_rtadetails_xml
 id imgv_aadhar_photo_spotchallan_xml
 id imgv_camera_capture_rta_details_xml
@@ -2391,11 +2393,14 @@ id locaton_layout
 id lv_paired
 id lvpendingchallans_xml
 id lyt_Age
+id lyt_AgeGender
+id lyt_Btns
 id lyt_DD_Details
 id lyt_DOB
 id lyt_Dates
 id lyt_Dtnd
 id lyt_GetDtls
+id lyt_Lctn
 id lyt_VehCategory
 id main_container
 id make_paymnt
@@ -2421,6 +2426,7 @@ id notification_main_column
 id notification_main_column_container
 id offence_dt
 id offence_time
+id offenderDL_image
 id offender_image
 id officer_Name
 id officer_Namelabel
@@ -2718,6 +2724,7 @@ id tv_cardtype_name
 id tv_chasis_pchallans_details_xml
 id tv_chasis_rtadetails_xml
 id tv_chasis_spotchallan_xml
+id tv_color_spotchallan_xml
 id tv_datetime_cust_pend_xml
 id tv_detaineditems_name
 id tv_detaineditems_name_spotchallantwo_xml

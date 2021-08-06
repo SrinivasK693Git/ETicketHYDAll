@@ -392,7 +392,7 @@
                     android:digits="0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ/"
                     android:gravity="center"
                     android:inputType="text|textCapCharacters"
-                    android:maxLength="25"></EditText>
+                    android:maxLength="25" />
             </LinearLayout>
 
             <Button
@@ -748,6 +748,42 @@
                             </LinearLayout>
 
                             <LinearLayout
+                                android:id="@+id/fuelyout"
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="5dp"
+                                android:layout_marginTop="3dp"
+                                android:layout_marginRight="5dp"
+                                android:gravity="center"
+                                android:orientation="horizontal"
+                                android:weightSum="1">
+
+                                <TextView
+                                    style="@style/TextColor"
+                                    android:layout_width="fill_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="0.7"
+                                    android:text="Vehicle Colour" />
+
+                                <TextView
+                                    style="@style/TextColor"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text=":" />
+
+                                <TextView
+                                    android:id="@+id/tv_color_spotchallan_xml"
+                                    style="@style/TextColor"
+                                    android:layout_width="fill_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:layout_marginStart="10dp"
+                                    android:layout_weight="0.3"
+                                    android:singleLine="false"
+                                    android:text="" />
+                            </LinearLayout>
+
+                            <LinearLayout
                                 android:id="@+id/chasisdetails_layout"
                                 android:layout_width="fill_parent"
                                 android:layout_height="wrap_content"
@@ -836,6 +872,43 @@
                     android:layout_marginTop="5dp"
                     android:textStyle="bold" />
 
+                <!--   DL Photo Capture-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:orientation="horizontal"
+                    android:visibility="gone">
+
+                    <TextView
+                        style="@style/navi_text_style"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="1"
+                        android:text="Capture DL Image" />
+
+                    <ImageButton
+                        android:id="@+id/imgvDL_camera_capture"
+                        android:layout_width="@dimen/_40sdp"
+                        android:layout_height="@dimen/_40sdp"
+                        android:layout_marginEnd="@dimen/header_grnt_padding_ten"
+                        android:background="@drawable/capture"
+                        android:contentDescription="@null" />
+
+                </LinearLayout>
+
+                <ImageView
+                    android:id="@+id/offenderDL_image"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_200sdp"
+                    android:layout_gravity="center"
+                    android:contentDescription="@null"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/photo"
+                    android:visibility="gone" />
+
                 <LinearLayout
                     android:id="@+id/rl_licences_spotchallan_xml"
                     android:layout_width="match_parent"
@@ -843,7 +916,7 @@
                     android:layout_below="@+id/textView_licence_header_spotchallan_xml"
                     android:layout_marginTop="5dp"
                     android:orientation="vertical"
-                    android:visibility="visible">
+                    android:visibility="gone">
 
                     <LinearLayout
                         android:id="@+id/ll_dl_details"
@@ -898,7 +971,6 @@
                             </LinearLayout>
 
                         </LinearLayout>
-
 
 
                         <RelativeLayout
@@ -1096,16 +1168,14 @@
                             </LinearLayout>
 
 
-
-                                <ImageView
-                                    android:id="@+id/img_Rejected"
-                                    android:layout_width="@dimen/_120sdp"
-                                    android:layout_height="@dimen/_120sdp"
-                                    android:src="@drawable/reject"
-                                    android:layout_alignParentEnd="true"
-                                    android:layout_margin="@dimen/_10sdp"
-                                    android:visibility="gone"/>
-
+                            <ImageView
+                                android:id="@+id/img_Rejected"
+                                android:layout_width="@dimen/_120sdp"
+                                android:layout_height="@dimen/_120sdp"
+                                android:layout_alignParentEnd="true"
+                                android:layout_margin="@dimen/_10sdp"
+                                android:src="@drawable/reject"
+                                android:visibility="gone" />
 
 
                         </RelativeLayout>
@@ -1675,105 +1745,113 @@
                 <!-- isOD details end -->
 
                 <LinearLayout
-                    android:id="@+id/lyt_Age"
+                    android:id="@+id/lyt_AgeGender"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/ll_gender"
-                    android:orientation="horizontal"
-                    android:weightSum="1">
+                    android:orientation="vertical">
 
-                    <TextView
-                        android:id="@+id/txtAge"
-                        style="@style/navi_text_style"
-                        android:layout_width="0dp"
+                    <LinearLayout
+                        android:id="@+id/lyt_Age"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_weight="0.27"
-                        android:text="@string/txt_DRName" />
+                        android:layout_below="@+id/ll_gender"
+                        android:orientation="horizontal"
+                        android:weightSum="1">
 
-                    <TextView
-                        android:id="@+id/starAge"
-                        style="@style/navi_text_style"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="0.03"
-                        android:text="*"
-                        android:textColor="#ff0000"
-                        android:visibility="invisible" />
-
-
-                    <EditText
-                        android:id="@+id/edt_Age"
-                        style="@style/edt_custom_style"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/header_grnt_padding_five"
-                        android:layout_weight="0.7"
-                        android:imeOptions="actionNext"
-                        android:inputType="number"
-                        android:maxLength="2" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/ll_gender"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginBottom="@dimen/header_grnt_padding_five"
-                    android:weightSum="1">
-
-                    <TextView
-                        android:id="@+id/tv_gendername"
-                        style="@style/navi_text_style"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_weight="0.27"
-                        android:text="@string/gender" />
-
-                    <TextView
-                        android:id="@+id/starGedr"
-                        style="@style/navi_text_style"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="0.03"
-                        android:text="*"
-                        android:textColor="#ff0000"
-                        android:visibility="invisible" />
-
-                    <RadioGroup
-                        android:id="@+id/radioGroup_gender"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="0.7"
-                        android:orientation="horizontal">
-
-                        <RadioButton
-                            android:id="@+id/rBtn_Male"
-                            style="@style/dd_custom_radio_btn_style"
-                            android:layout_width="wrap_content"
+                        <TextView
+                            android:id="@+id/txtAge"
+                            style="@style/navi_text_style"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:paddingLeft="@dimen/header_grnt_padding_ten"
-                            android:text="@string/gen_male" />
+                            android:layout_gravity="center_vertical"
+                            android:layout_weight="0.27"
+                            android:text="@string/txt_DRName" />
 
-                        <RadioButton
-                            android:id="@+id/rBtn_FeMale"
-                            style="@style/dd_custom_radio_btn_style"
-                            android:layout_width="wrap_content"
+                        <TextView
+                            android:id="@+id/starAge"
+                            style="@style/navi_text_style"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:paddingLeft="@dimen/header_grnt_padding_ten"
-                            android:text="@string/gen_female" />
+                            android:layout_weight="0.03"
+                            android:text="*"
+                            android:textColor="#ff0000"
+                            android:visibility="invisible" />
 
-                        <RadioButton
-                            android:id="@+id/rBtn_Others"
-                            style="@style/dd_custom_radio_btn_style"
-                            android:layout_width="wrap_content"
+
+                        <EditText
+                            android:id="@+id/edt_Age"
+                            style="@style/edt_custom_style"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:paddingLeft="@dimen/header_grnt_padding_ten"
-                            android:text="@string/gen_others" />
-                    </RadioGroup>
+                            android:layout_marginTop="@dimen/header_grnt_padding_five"
+                            android:layout_weight="0.7"
+                            android:imeOptions="actionNext"
+                            android:inputType="number"
+                            android:maxLength="2" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ll_gender"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="@dimen/header_grnt_padding_five"
+                        android:weightSum="1">
+
+                        <TextView
+                            android:id="@+id/tv_gendername"
+                            style="@style/navi_text_style"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_weight="0.27"
+                            android:text="@string/gender" />
+
+                        <TextView
+                            android:id="@+id/starGedr"
+                            style="@style/navi_text_style"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.03"
+                            android:text="*"
+                            android:textColor="#ff0000"
+                            android:visibility="invisible" />
+
+                        <RadioGroup
+                            android:id="@+id/radioGroup_gender"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.7"
+                            android:orientation="horizontal">
+
+                            <RadioButton
+                                android:id="@+id/rBtn_Male"
+                                style="@style/dd_custom_radio_btn_style"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:paddingLeft="@dimen/header_grnt_padding_ten"
+                                android:text="@string/gen_male" />
+
+                            <RadioButton
+                                android:id="@+id/rBtn_FeMale"
+                                style="@style/dd_custom_radio_btn_style"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:paddingLeft="@dimen/header_grnt_padding_ten"
+                                android:text="@string/gen_female" />
+
+                            <RadioButton
+                                android:id="@+id/rBtn_Others"
+                                style="@style/dd_custom_radio_btn_style"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:paddingLeft="@dimen/header_grnt_padding_ten"
+                                android:text="@string/gen_others" />
+                        </RadioGroup>
+                    </LinearLayout>
+
                 </LinearLayout>
 
 
@@ -1926,6 +2004,7 @@
 
 
                 <LinearLayout
+                    android:id="@+id/lyt_Lctn"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
@@ -2069,6 +2148,7 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/lyt_Btns"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/ll_4_spot_challan_xml"

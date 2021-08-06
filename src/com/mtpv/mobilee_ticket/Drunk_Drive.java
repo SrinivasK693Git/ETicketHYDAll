@@ -295,7 +295,7 @@ public class Drunk_Drive extends AppCompatActivity implements OnClickListener, L
     BleDevice bleDevice;
     Button btn_vehCategory;
     DatePickerFragmentDialog datePickerDialog;
-    public static String bt_ID = "";
+    public static String bt_ID = "", calbrition_Date = "";
 
     @SuppressLint({"NewApi", "MissingPermission", "ObsoleteSdkInt", "SimpleDateFormat"})
     @Override
@@ -1315,6 +1315,7 @@ public class Drunk_Drive extends AppCompatActivity implements OnClickListener, L
         Log.i("blebleRecordForm", "RecordFormDeviceNum:" + recordForms.get(0).getRecordFormDeviceNum());//device model
         Log.i("blebleRecordForm", "RecordFormSerialNum:" + recordForms.get(0).getRecordFormSerialNum());//serial number
         try {
+            calbrition_Date = "";
             if (recordForms.size() > 0 && null != recordForms) {
                 Device device = EventOperator.getDevice();
                 String calTime = device.getLastDate();
@@ -1324,10 +1325,10 @@ public class Drunk_Drive extends AppCompatActivity implements OnClickListener, L
                 date = date + "20" + year;
                 date = date + "-" + hexToDec("" + calTime.substring(2, 4));
                 date = date + "-" + hexToDec("" + calTime.substring(4, 6));
-                String calDate = new DateUtil().changeDateFormat(date);
-                Log.d("calDate", calDate);
+                calbrition_Date = new DateUtil().changeDateFormat(date);
+                Log.d("calDate", calbrition_Date);
                 String todayDate = new DateUtil().getTodaysDate();
-                if (compareDates(calDate, todayDate)) {
+                if (compareDates(calbrition_Date, todayDate)) {
                     edt_checkslno_.setText("" + recordForms.get(0).getRecordFormNum());
                     edt_alchl_reading.setText("" + recordForms.get(0).getRecordFormMeasureNum());
                     bt_ID = "" + recordForms.get(0).getRecordFormSerialNum();
@@ -1342,6 +1343,7 @@ public class Drunk_Drive extends AppCompatActivity implements OnClickListener, L
             edt_checkslno_.setText("");
             edt_alchl_reading.setText("");
             bt_ID = "";
+            calbrition_Date = "";
         }
 
     }

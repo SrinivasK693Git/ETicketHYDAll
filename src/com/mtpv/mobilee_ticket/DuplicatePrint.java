@@ -100,8 +100,8 @@ public class DuplicatePrint extends Activity implements OnClickListener {
     // Button btn_report_type;
 
     /*----------REPORT ARRAY-------*/
-    String day_report = "Day Report";
-    String officer_perfmnce = "Officer Performance";
+    String day_report = "Day Report (Abstract)";
+    String officer_perfmnce = "Officer Performance (Realization)";
     String wheeler_based = "Wheeler Based";
     String violation_based = "Violations Based Report";
     String[] report_type_arr = {day_report, officer_perfmnce, wheeler_based, violation_based};
@@ -122,7 +122,7 @@ public class DuplicatePrint extends Activity implements OnClickListener {
     TextView tv_dp_text, textView_header_spot_challan_xml;
     Button btn_print_dp;
 
-	/*-------------------------------------------------------------*/
+    /*-------------------------------------------------------------*/
 
     public static String printer_addrss, printer_name;
 
@@ -245,7 +245,7 @@ public class DuplicatePrint extends Activity implements OnClickListener {
         print_respose = new ArrayList<String>();
         print_apptype = new ArrayList<String>();
 
-		/* FOR DUPLICATE PRINT APP TYPE IS TAKEN FROM DATABASE */
+        /* FOR DUPLICATE PRINT APP TYPE IS TAKEN FROM DATABASE */
         db = new DBHelper(getApplicationContext());
         try {
             db.open();
@@ -323,7 +323,7 @@ public class DuplicatePrint extends Activity implements OnClickListener {
         // TODO Auto-generated method stub
         switch (v.getId()) {
 
-		/* REPORT PRINT */
+            /* REPORT PRINT */
             case R.id.btnprint_report_xml:
 
                 //printHandler.printChallan("" + ServiceHelper.Opdata_Chalana);
@@ -331,7 +331,7 @@ public class DuplicatePrint extends Activity implements OnClickListener {
                 // printResponse();
                 break;
 
-		/* DUPLICATE PRINT */
+            /* DUPLICATE PRINT */
             case R.id.btnprint_dup_res_xml:
 
                 //printHandler.printChallan("" + ServiceHelper.Opdata_Chalana);
@@ -340,7 +340,7 @@ public class DuplicatePrint extends Activity implements OnClickListener {
                 break;
 
             case R.id.btnselect_dateselection_report_xml:
-			/* FOR REPORTS WE NEED TO SELECT DATE SELECTION */
+                /* FOR REPORTS WE NEED TO SELECT DATE SELECTION */
                 if (Dashboard.check_vhleHistory_or_Spot.equals("reports")) {
                     showDialog(PRESENT_DATE_PICKER);
                 }
@@ -351,13 +351,13 @@ public class DuplicatePrint extends Activity implements OnClickListener {
                 showDialog(REPORT_TYPE);
                 break;
 
-		/*------DUPLICATE PRINT------------*/
+            /*------DUPLICATE PRINT------------*/
             case R.id.btn_dateselection_dp_xml:
                 showDialog(PRESENT_DATE_PICKER);
                 break;
 
             case R.id.btnselect_app_type_dup_xml:
-			/*----FOR DUPLICATE RECORDS NEED TO SELECT APP TYPE----*/
+                /*----FOR DUPLICATE RECORDS NEED TO SELECT APP TYPE----*/
                 if (print_respose.size() > 0) {
                     online_report_status = "";
                     showDialog(APPTYPE_DIALOG);
@@ -433,13 +433,13 @@ public class DuplicatePrint extends Activity implements OnClickListener {
                                     && (!ServiceHelper.Opdata_Chalana.equals("NA"))) {
 
                                 try {
-									/*
-									 * String printdata =
-									 * bth_printer.font_Courier_41(""+
-									 * ServiceHelper.Opdata_Chalana);
-									 * actual_printer.Call_PrintertoPrint("" +
-									 * address, "" + printdata);
-									 */
+                                    /*
+                                     * String printdata =
+                                     * bth_printer.font_Courier_41(""+
+                                     * ServiceHelper.Opdata_Chalana);
+                                     * actual_printer.Call_PrintertoPrint("" +
+                                     * address, "" + printdata);
+                                     */
 
                                     Bluetooth_Printer_3inch_ThermalAPI printer = new Bluetooth_Printer_3inch_ThermalAPI();
 
@@ -480,13 +480,13 @@ public class DuplicatePrint extends Activity implements OnClickListener {
 
                                     try {
                                         Log.i("ONLINE PRINT", "ONLINE PRINT");
-										/*
-										 * String printdata =
-										 * bth_printer.font_Courier_41(""+
-										 * ServiceHelper.Opdata_Chalana);
-										 * actual_printer.Call_PrintertoPrint(
-										 * ""+ address, "" + printdata);
-										 */
+                                        /*
+                                         * String printdata =
+                                         * bth_printer.font_Courier_41(""+
+                                         * ServiceHelper.Opdata_Chalana);
+                                         * actual_printer.Call_PrintertoPrint(
+                                         * ""+ address, "" + printdata);
+                                         */
 
                                         Bluetooth_Printer_3inch_ThermalAPI printer = new Bluetooth_Printer_3inch_ThermalAPI();
 
@@ -514,15 +514,15 @@ public class DuplicatePrint extends Activity implements OnClickListener {
                                                 .equals("" + getResources().getString(R.string.dup_drunk_drive)))
                                                 && (!print_respose.get(selected_type).equals(""))) {
                                             try {
-												/*
-												 * String printdata =
-												 * bth_printer.font_Courier_41(
-												 * ""+ print_respose.get(
-												 * selected_type));
-												 * actual_printer.
-												 * Call_PrintertoPrint("" +
-												 * address, "" + printdata);
-												 */
+                                                /*
+                                                 * String printdata =
+                                                 * bth_printer.font_Courier_41(
+                                                 * ""+ print_respose.get(
+                                                 * selected_type));
+                                                 * actual_printer.
+                                                 * Call_PrintertoPrint("" +
+                                                 * address, "" + printdata);
+                                                 */
 
                                                 Bluetooth_Printer_3inch_ThermalAPI printer = new Bluetooth_Printer_3inch_ThermalAPI();
 
@@ -549,15 +549,15 @@ public class DuplicatePrint extends Activity implements OnClickListener {
                                                 .equals("" + getResources().getString(R.string.dup_spot_challan)))
                                                 && (!print_respose.get(selected_type).equals(""))) {
                                             try {
-												/*
-												 * String printdata =
-												 * bth_printer.font_Courier_41(
-												 * ""+ print_respose.get(
-												 * selected_type));
-												 * actual_printer.
-												 * Call_PrintertoPrint("" +
-												 * address, ""+ printdata);
-												 */
+                                                /*
+                                                 * String printdata =
+                                                 * bth_printer.font_Courier_41(
+                                                 * ""+ print_respose.get(
+                                                 * selected_type));
+                                                 * actual_printer.
+                                                 * Call_PrintertoPrint("" +
+                                                 * address, ""+ printdata);
+                                                 */
 
                                                 Bluetooth_Printer_3inch_ThermalAPI printer = new Bluetooth_Printer_3inch_ThermalAPI();
 
@@ -585,15 +585,15 @@ public class DuplicatePrint extends Activity implements OnClickListener {
                                                 && (!print_respose.get(selected_type).equals(""))) {
 
                                             try {
-												/*
-												 * String printdata =
-												 * bth_printer.font_Courier_41(
-												 * ""+ print_respose.get(
-												 * selected_type));
-												 * actual_printer.
-												 * Call_PrintertoPrint("" +
-												 * address, ""+ printdata);
-												 */
+                                                /*
+                                                 * String printdata =
+                                                 * bth_printer.font_Courier_41(
+                                                 * ""+ print_respose.get(
+                                                 * selected_type));
+                                                 * actual_printer.
+                                                 * Call_PrintertoPrint("" +
+                                                 * address, ""+ printdata);
+                                                 */
                                                 Bluetooth_Printer_3inch_ThermalAPI printer = new Bluetooth_Printer_3inch_ThermalAPI();
 
                                                 String print_data = printer
@@ -619,15 +619,15 @@ public class DuplicatePrint extends Activity implements OnClickListener {
                                                 && (!print_respose.get(selected_type).equals(""))) {
 
                                             try {
-												/*
-												 * String printdata =
-												 * bth_printer.font_Courier_41(
-												 * ""+ print_respose.get(
-												 * selected_type));
-												 * actual_printer.
-												 * Call_PrintertoPrint("" +
-												 * address, ""+ printdata);
-												 */
+                                                /*
+                                                 * String printdata =
+                                                 * bth_printer.font_Courier_41(
+                                                 * ""+ print_respose.get(
+                                                 * selected_type));
+                                                 * actual_printer.
+                                                 * Call_PrintertoPrint("" +
+                                                 * address, ""+ printdata);
+                                                 */
 
                                                 Bluetooth_Printer_3inch_ThermalAPI printer = new Bluetooth_Printer_3inch_ThermalAPI();
 
@@ -707,13 +707,13 @@ public class DuplicatePrint extends Activity implements OnClickListener {
                                     && (!ServiceHelper.Opdata_Chalana.equals("NA"))) {
 
                                 try {
-									/*
-									 * String printdata =
-									 * bth_printer.font_Courier_41(""+
-									 * ServiceHelper.Opdata_Chalana);
-									 * actual_printer.Call_PrintertoPrint("" +
-									 * address, "" + printdata);
-									 */
+                                    /*
+                                     * String printdata =
+                                     * bth_printer.font_Courier_41(""+
+                                     * ServiceHelper.Opdata_Chalana);
+                                     * actual_printer.Call_PrintertoPrint("" +
+                                     * address, "" + printdata);
+                                     */
                                     Bluetooth_Printer_3inch_ThermalAPI printer = new Bluetooth_Printer_3inch_ThermalAPI();
 
                                     String print_data = printer.font_Courier_41("" + ServiceHelper.Opdata_Chalana);
@@ -1256,13 +1256,13 @@ public class DuplicatePrint extends Activity implements OnClickListener {
                             Log.i("ONLINE PRINT", "ONLINE PRINT");
 
                             try {
-								/*
-								 * String printdata =
-								 * bth_printer.font_Courier_41(""+
-								 * ServiceHelper.Opdata_Chalana);
-								 * actual_printer.Call_PrintertoPrint("" +
-								 * address, "" + printdata);
-								 */
+                                /*
+                                 * String printdata =
+                                 * bth_printer.font_Courier_41(""+
+                                 * ServiceHelper.Opdata_Chalana);
+                                 * actual_printer.Call_PrintertoPrint("" +
+                                 * address, "" + printdata);
+                                 */
 
                                 Bluetooth_Printer_3inch_ThermalAPI printer = new Bluetooth_Printer_3inch_ThermalAPI();
 
@@ -1415,8 +1415,8 @@ public class DuplicatePrint extends Activity implements OnClickListener {
 
             Log.i("DAY REPORT : ", "" + present_date_toSend);
 
-			/* ONLY IN REPORT ON DATE SELECTION SERVICE NEED TO CALL */
-			/* IN DUPLIATE PRINT ON PRESS OF GO BUTTON SERVICE NEED TO CALL */
+            /* ONLY IN REPORT ON DATE SELECTION SERVICE NEED TO CALL */
+            /* IN DUPLIATE PRINT ON PRESS OF GO BUTTON SERVICE NEED TO CALL */
             if (Dashboard.check_vhleHistory_or_Spot.equals("reports")) {
 
                 btn_report_dateselection.setText("" + present_date_toSend.toUpperCase());
@@ -1480,10 +1480,10 @@ public class DuplicatePrint extends Activity implements OnClickListener {
         }
     }
 
-	/* REPORTS END */
+    /* REPORTS END */
 
     /*-------------------------------------------------------------------------*/
-	/* ONLINE REPORTS START */
+    /* ONLINE REPORTS START */
     public class Async_getOnlineDuplicatePrint extends AsyncTask<Void, Void, String> {
         @SuppressLint("DefaultLocale")
         @SuppressWarnings("unused")
@@ -1536,7 +1536,7 @@ public class DuplicatePrint extends Activity implements OnClickListener {
         }
     }
 
-	/* ONLINE REPORTS END */
+    /* ONLINE REPORTS END */
 
     private void showToast(String msg) {
         // TODO Auto-generated method stub
