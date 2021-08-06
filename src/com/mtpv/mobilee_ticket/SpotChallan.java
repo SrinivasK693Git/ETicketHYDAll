@@ -271,8 +271,8 @@ public class SpotChallan extends AppCompatActivity
     public static EditText edt_prfession_name, edt_prfession_Address, edt_email_ID;
     String ocuptn_title = "Select Occupation";
     String[] occup_code_arr, occup_name_arr;
-    LinearLayout proffession_layout, lyt_GetDtls, lyt_AgeGender, lyt_Lctn, lyt_Btns;
-    ImageView img_Rejected;
+    LinearLayout proffession_layout, lyt_GetDtls, lyt_AgeGender, lyt_Lctn, lyt_Btns, lyt_DL_Copy;
+    ImageView img_Rejected, offenderDL_image, imgvDL_camera_capture;
     String violation_code_value, str_Loc_Code = "";
     int presentviolatedpoints = 0;
     public static String profession_code = "";
@@ -283,6 +283,9 @@ public class SpotChallan extends AppCompatActivity
     public boolean timerStopped, isSlctLocation = false;
     public String google_MapKey;
     Button btn_Refsl_OK;
+    boolean isDL_Captured = false, isDL_DataAvailable = false;
+    String final_imageDL_data_tosend = "";
+
 
     @SuppressWarnings("unused")
     private boolean isValidEmaillId(String email) {
@@ -381,12 +384,16 @@ public class SpotChallan extends AppCompatActivity
         lyt_AgeGender = findViewById(R.id.lyt_AgeGender);
         lyt_Lctn = findViewById(R.id.lyt_Lctn);
         lyt_Btns = findViewById(R.id.lyt_Btns);
+        lyt_DL_Copy = findViewById(R.id.lyt_DL_Copy);
+        offenderDL_image = findViewById(R.id.offenderDL_image);
+        imgvDL_camera_capture = findViewById(R.id.imgvDL_camera_capture);
         img_Rejected = findViewById(R.id.img_Rejected);
         btn_vehCategory = findViewById(R.id.btn_vehCategory);
         lyt_VehCategory = findViewById(R.id.lyt_VehCategory);
         btn_SlctLctn = findViewById(R.id.btn_SlctLctn);
         btn_vehCategory.setOnClickListener(this);
         btn_SlctLctn.setOnClickListener(this);
+        imgvDL_camera_capture.setOnClickListener(this);
 
         newtimer = new CountDownTimer(1000000000, 50) {
 
@@ -2079,6 +2086,10 @@ public class SpotChallan extends AppCompatActivity
                 selectImagefrom_Camera();
                 break;
 
+            case R.id.imgvDL_camera_capture:
+                selectImage_DL_from_Camera();
+                break;
+
             case R.id.imgv_gallery_spotchallan_xml:
                 selectImagefrom_Gallery();
                 break;
@@ -2121,6 +2132,27 @@ public class SpotChallan extends AppCompatActivity
         }
         //   imgSelected = "1";
     }
+
+    private void selectImage_DL_from_Camera() {
+
+        if (Build.VERSION.SDK_INT <= 23) {
+            Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+            File f = new File(android.os.Environment.getExternalStorageDirectory(), "temp.jpg");
+            intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(f));
+            startActivityForResult(intent, 3);
+
+        } else {
+            Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+            File f = new File(android.os.Environment.getExternalStorageDirectory(), "temp.jpg");
+            intent.putExtra(MediaStore.EXTRA_OUTPUT, FileProvider.getUriForFile(SpotChallan.this,
+                    BuildConfig.APPLICATION_ID + ".provider", f));
+            intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+            startActivityForResult(intent, 3);
+
+        }
+        //   imgSelected = "1";
+    }
+
 
     public class Async_VehicleCategory extends AsyncTask<Void, Void, String> {
 
@@ -2374,6 +2406,36 @@ public class SpotChallan extends AppCompatActivity
 
                     } else if (bitmap == null) {
                         showToast("Image Cannot be Loaded !");
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+            } else if (requestCode == 3) {
+                try {
+
+                    File f = new File(Environment.getExternalStorageDirectory().toString());
+                    for (File temp : f.listFiles()) {
+                        if (temp.getName().equals("temp.jpg")) {
+                            f = temp;
+                            break;
+                        }
+                    }
+
+                    Bitmap bitmap;
+                    BitmapFactory.Options bitmapOptions = new BitmapFactory.Options();
+                    bitmap = BitmapFactory.decodeFile(f.getAbsolutePath(), bitmapOptions);
+
+                    Bitmap mutableBitmap;
+                    mutableBitmap = bitmap.copy(Bitmap.Config.ARGB_8888, true);
+                    if (null != mutableBitmap) {
+                        offenderDL_image.setImageBitmap(mutableBitmap);
+                        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+                        mutableBitmap.compress(Bitmap.CompressFormat.JPEG, 80, bytes);
+                        byteArray = bytes.toByteArray();
+                        final_imageDL_data_tosend = Base64.encodeToString(byteArray, Base64.NO_WRAP);
+                        offenderDL_image.setVisibility(View.VISIBLE);
+                        isDL_Captured = true;
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -2712,6 +2774,11 @@ public class SpotChallan extends AppCompatActivity
         @Override
         protected String doInBackground(Void... params) {
             try {
+                isDL_Captured = false;
+                isDL_DataAvailable = false;
+                final_imageDL_data_tosend = "";
+                lyt_DL_Copy.setVisibility(View.GONE);
+                offenderDL_image.setVisibility(View.GONE);
                 ServiceHelper.getLicenceDetails("" + licence_no, dob_DL);
             } catch (Exception e) {
                 e.printStackTrace();
@@ -2742,6 +2809,7 @@ public class SpotChallan extends AppCompatActivity
 
                 if (ServiceHelper.license_data != null && !ServiceHelper.license_data.equals("0") &&
                         (SpotChallan.licence_details_spot_master != null && SpotChallan.licence_details_spot_master.length > 0)) {
+                    isDL_DataAvailable = true;
 
                     ll_validationString = ServiceHelper.license_data;
                     if ("INVALID".equalsIgnoreCase(ServiceHelper.license_data)) {
@@ -2879,6 +2947,10 @@ public class SpotChallan extends AppCompatActivity
                 } else {
                     tv_licence_details_header_spot.setText("DRIVING LICENCE DETAILS NOT FOUND");
                     // rl_licence_details_layout.setVisibility(View.GONE);
+                    lyt_DL_Copy.setVisibility(View.VISIBLE);
+                    offenderDL_image.setVisibility(View.GONE);
+                    isDL_DataAvailable = false;
+
                 }
             } catch (Exception e) {
                 e.printStackTrace();
@@ -6029,7 +6101,7 @@ public class SpotChallan extends AppCompatActivity
                     "" + pswd, "" + final_image_data_tosend, "", "",
                     "" + str_Loc_Code, "" + refsal_Info,
                     "" + pancard_to_send, "" + aadhar_no, "" + VoterId_to_send, "" + passport_to_send,
-                    "" + final_image_data_tosend, "" + et_driver_contact_spot.getText().toString(), "" + is_it_spot_send,
+                    "" + final_imageDL_data_tosend, "" + et_driver_contact_spot.getText().toString(), "" + is_it_spot_send,
                     "" + present_date_toSend.toUpperCase(), "" + present_time_toSend, "" + DLvalidFLG,
                     "" + whlr_code_send, "" + Dashboard.VEH_CAT_FIX, "" + Dashboard.VEH_MAINCAT_FIX,
                     "" + rtaresponse, "" + violations_details_send, "" + penchallans, "" + extraPassengers,
@@ -8308,7 +8380,9 @@ public class SpotChallan extends AppCompatActivity
 
         // validate offence code64 w/o DL
         if ("0".equals(imgSelected)) {
-            showToast("Please Take Driver's Photo !");
+            showToast(" Please Take Driver's Photo ! ");
+        }else if (!et_driver_lcnce_num_spot.getText().toString().isEmpty() && !isDL_DataAvailable && !isDL_Captured){
+            showToast("  Please Capture DL Photo ! ");
         }
        /* if ("0".equals(imgSelected) && vioDetainCheckFlag.equals("1")) {
             showToast("Please Take Driver's Photo !");

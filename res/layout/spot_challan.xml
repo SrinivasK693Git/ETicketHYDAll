@@ -874,11 +874,13 @@
 
                 <!--   DL Photo Capture-->
                 <LinearLayout
+                    android:id="@+id/lyt_DL_Copy"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
                     android:layout_centerHorizontal="true"
                     android:orientation="horizontal"
+                    android:layout_margin="@dimen/_5sdp"
                     android:visibility="gone">
 
                     <TextView
@@ -906,6 +908,7 @@
                     android:layout_gravity="center"
                     android:contentDescription="@null"
                     android:scaleType="fitXY"
+                    android:layout_margin="@dimen/_10sdp"
                     android:src="@drawable/photo"
                     android:visibility="gone" />
 
