@@ -2188,6 +2188,7 @@ id et_CntctNo
 id et_OTP
 id et_PAddress
 id et_PmtAddress
+id et_RegTRCsEnNo
 id et_Value
 id et_chasisNo
 id et_dd_address
@@ -2402,6 +2403,7 @@ id lyt_Dates
 id lyt_Dtnd
 id lyt_GetDtls
 id lyt_Lctn
+id lyt_RegTRCsEnNo
 id lyt_VehCategory
 id main_container
 id make_paymnt
@@ -2493,6 +2495,7 @@ id radio
 id radioButton_IPAdress
 id radioButton_live
 id radioButton_test
+id radioGroupButton_TrNo
 id radioGroupButton_card_type0
 id radioGroupButton_card_type1
 id radioGroupButton_card_type2
@@ -2713,6 +2716,7 @@ id transition_scene_layoutid_cache
 id transition_transform
 id tv1
 id tv_Covid
+id tv_RegTRCsEnNo
 id tv_TpVltrs
 id tv_about_version
 id tv_addr_rtadetails_xml

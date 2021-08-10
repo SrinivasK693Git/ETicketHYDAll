@@ -339,7 +339,7 @@
     <string name="title_activity_date_of_birth__update">DateOfBirth_Update</string>
     <string name="title_activity_change_password">ChangePassword</string>
     <string name="title_activity_releaseversion">ReleaseversionActivity</string>
-    <string name="capture_image">Capture Image</string>
+    <string name="capture_image">Capture Vehicle with Driver Image</string>
     <string name="fake_vehicle">FAKE VEHICLE</string>
     <string name="enter_last_fiv_dig_chass_no">Enter Last Five Digits of Vehicle Chasis No</string>
     <string name="title_activity_dash_pc__hg">DashPC_HG</string>

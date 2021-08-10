@@ -1140,7 +1140,6 @@ public class GenerateDrunkDriveCase extends Activity implements OnClickListener,
 
                 smsMsgCall = true;
 
-                /*---------------------------------------------------------*/
                 String tempContactNumber = et_driver_contact_no.getText().toString().trim();
                 if (tempContactNumber.equals("")) {
                     et_driver_contact_no
@@ -2387,7 +2386,6 @@ public class GenerateDrunkDriveCase extends Activity implements OnClickListener,
                         if (imageModel.isSelected()) {
                             String s = imageModel.getChallanNo();
                             Log.d("ChalnNo", "" + s);
-
                         }
                     }
                 }

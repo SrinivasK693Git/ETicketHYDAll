@@ -263,9 +263,9 @@ public class SpotChallan extends AppCompatActivity
     public static String citizen_status = "indian", helmetcases = "0";
     public static RadioGroup radioGrp_regNo_EngnNo_Chasis;
     public static RadioButton radioGroupButton_regNo, radioGroupButton_engineNo, radioGroupButton_chasisNo;
-    public static LinearLayout ll_mainsub_root, ll_engineNo, ll_chasisNo, ll_regno;
+    public static LinearLayout ll_mainsub_root, ll_engineNo, ll_chasisNo, ll_regno, lyt_RegTRCsEnNo;
     public static EditText et_engineNo, et_chasisNo;
-    public static boolean EngneFLG = false, regNoFLG = false, chasisFLG = false, veh_HisFLG = false;
+    public static boolean EngneFLG = false, regNoFLG = true, chasisFLG = false, veh_HisFLG = false;
     public static int isitTr = 1, soldOut = 0, penaltypointsreachedFlag = 0;
     public static Button btn_select_profession, btn_vehCategory;
     public static EditText edt_prfession_name, edt_prfession_Address, edt_email_ID;
@@ -337,6 +337,9 @@ public class SpotChallan extends AppCompatActivity
     VltnListModel vltnListModel;
     DatePickerFragmentDialog datePickerDialog;
     public boolean smsMsgCall = true;
+    TextView tv_RegTRCsEnNo;
+    EditText et_RegTRCsEnNo;
+    String isVehicleInfoKey = "R";
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -391,6 +394,8 @@ public class SpotChallan extends AppCompatActivity
         btn_vehCategory = findViewById(R.id.btn_vehCategory);
         lyt_VehCategory = findViewById(R.id.lyt_VehCategory);
         btn_SlctLctn = findViewById(R.id.btn_SlctLctn);
+        tv_RegTRCsEnNo = findViewById(R.id.tv_RegTRCsEnNo);
+        et_RegTRCsEnNo = findViewById(R.id.et_RegTRCsEnNo);
         btn_vehCategory.setOnClickListener(this);
         btn_SlctLctn.setOnClickListener(this);
         imgvDL_camera_capture.setOnClickListener(this);
@@ -650,6 +655,22 @@ public class SpotChallan extends AppCompatActivity
             public void afterTextChanged(Editable s) {
             }
         });
+        et_RegTRCsEnNo.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                lyt_GetDtls.setVisibility(View.GONE);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
         vehicle_type = (LinearLayout) findViewById(R.id.vehicle_type);
         police_vehcle = (CheckBox) findViewById(R.id.police_vehcle);
         govt_vehcle = (CheckBox) findViewById(R.id.govt_vehcle);
@@ -900,6 +921,7 @@ public class SpotChallan extends AppCompatActivity
 
         // releasedDetained_items_list_toSend.remove(releasedDetained_items_list_toSend);
         ll_regno = (LinearLayout) findViewById(R.id.ll_regno);
+        lyt_RegTRCsEnNo = findViewById(R.id.lyt_RegTRCsEnNo);
         ll_engineNo = (LinearLayout) findViewById(R.id.ll_engineNo);
         ll_chasisNo = (LinearLayout) findViewById(R.id.ll_chasisNo);
         radioGrp_regNo_EngnNo_Chasis = (RadioGroup) findViewById(R.id.radioGrp_regNo_EngnNo_Chasis);
@@ -916,6 +938,7 @@ public class SpotChallan extends AppCompatActivity
 
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
+
                 // TODO Auto-generated method stub
                 if (checkedId == R.id.radioGroupButton_regNo) {
 
@@ -923,9 +946,14 @@ public class SpotChallan extends AppCompatActivity
                     EngneFLG = false;
                     chasisFLG = false;
                     isitTr = 1;
+                    isVehicleInfoKey = "R";//REG
+                    tv_RegTRCsEnNo.setText("Registration No");
+                    et_RegTRCsEnNo.setText("");
                     ll_engineNo.setVisibility(View.GONE);
                     ll_regno.setVisibility(View.VISIBLE);
                     ll_chasisNo.setVisibility(View.GONE);
+                    lyt_RegTRCsEnNo.setVisibility(View.GONE);
+                    lyt_GetDtls.setVisibility(View.GONE);
                     et_regcid_spot.setText("");
                     et_vchl_num_spot.setText("");
                     et_last_num_spot.setText("");
@@ -940,7 +968,12 @@ public class SpotChallan extends AppCompatActivity
                     regNoFLG = false;
                     chasisFLG = false;
                     isitTr = 2;
-                    ll_engineNo.setVisibility(View.VISIBLE);
+                    isVehicleInfoKey = "E";//ENG JF50ET7027745
+                    tv_RegTRCsEnNo.setText("Engine No");
+                    et_RegTRCsEnNo.setText("");
+                    lyt_RegTRCsEnNo.setVisibility(View.VISIBLE);
+                    lyt_GetDtls.setVisibility(View.GONE);
+                    ll_engineNo.setVisibility(View.GONE);
                     et_engineNo.setText("");
                     et_engineNo.requestFocus();
                     ll_regno.setVisibility(View.GONE);
@@ -957,9 +990,36 @@ public class SpotChallan extends AppCompatActivity
                     EngneFLG = false;
                     regNoFLG = false;
                     isitTr = 3;
+                    isVehicleInfoKey = "C";//CHASSIS ME4JF50ACJT027716
+                    tv_RegTRCsEnNo.setText("Chassis No");
+                    et_RegTRCsEnNo.setText("");
+                    lyt_RegTRCsEnNo.setVisibility(View.VISIBLE);
+                    lyt_GetDtls.setVisibility(View.GONE);
                     ll_engineNo.setVisibility(View.GONE);
                     ll_regno.setVisibility(View.GONE);
-                    ll_chasisNo.setVisibility(View.VISIBLE);
+                    ll_chasisNo.setVisibility(View.GONE);
+                    et_chasisNo.setText("");
+                    et_regcid_spot.setText("");
+                    et_vchl_num_spot.setText("");
+                    et_last_num_spot.setText("");
+                    et_regcid_spot.requestFocus();
+                    et_driver_lcnce_num_spot.setText("");
+                    et_aadharnumber_spot.setText("");
+                    btn_wheller_code.setText("" + getString(R.string.select_wheeler_code));
+
+                } else if (checkedId == R.id.radioGroupButton_TrNo) {
+                    chasisFLG = true;
+                    EngneFLG = false;
+                    regNoFLG = false;
+                    isitTr = 4;
+                    isVehicleInfoKey = "T";
+                    tv_RegTRCsEnNo.setText("TR No");
+                    et_RegTRCsEnNo.setText("");
+                    lyt_RegTRCsEnNo.setVisibility(View.VISIBLE);
+                    lyt_GetDtls.setVisibility(View.GONE);
+                    ll_engineNo.setVisibility(View.GONE);
+                    ll_regno.setVisibility(View.GONE);
+                    ll_chasisNo.setVisibility(View.GONE);
                     et_chasisNo.setText("");
                     et_regcid_spot.setText("");
                     et_vchl_num_spot.setText("");
@@ -1247,6 +1307,8 @@ public class SpotChallan extends AppCompatActivity
                 completeVehicle_num_send = ("" + et_regcid_spot.getText().toString() + ""
                         + et_vchl_num_spot.getText().toString() + "" + et_last_num_spot.getText().toString());
 
+                //completeVehicle_num_send = et_RegTRCsEnNo.getText().toString().trim();
+
                 getLocation();
                 total_amount = 0;
                 btn_wheller_code.setText(getString(R.string.select_wheeler_code));
@@ -1254,7 +1316,7 @@ public class SpotChallan extends AppCompatActivity
 
                 String dateofbirthbut = dob_input.getText().toString();
 
-                if ("0000".equalsIgnoreCase(regnName_send) || "0000".equalsIgnoreCase(vehicle_num_send)) {
+                if (("0000".equalsIgnoreCase(regnName_send) || "0000".equalsIgnoreCase(vehicle_num_send)) && regNoFLG) {
                     showToast("   Please enter valid Registration No !   ");
                 } else {
                     if (!et_driver_lcnce_num_spot.getText().toString().equalsIgnoreCase("") && et_driver_lcnce_num_spot.getText().toString().length() >= 5) {
@@ -1322,8 +1384,10 @@ public class SpotChallan extends AppCompatActivity
                 break;
 
             case R.id.btn_SlctLctn:
-                if (et_regcid_spot.getText().toString().equals("") || et_last_num_spot.getText().toString().equals("")) {
+                if ((et_regcid_spot.getText().toString().equals("") || et_last_num_spot.getText().toString().equals("")) && regNoFLG) {
                     showToast("Please Enter Proper Vehicle Number");
+                } else if (et_RegTRCsEnNo.getText().toString().trim().isEmpty() && !regNoFLG){
+                    showToast("Please Enter Proper Number");
                 } else {
                     if (isOnline()) {
 
@@ -1336,9 +1400,11 @@ public class SpotChallan extends AppCompatActivity
                 break;
 
             case R.id.btn_vehCategory:
-                if (et_regcid_spot.getText().toString().equals("") || et_last_num_spot.getText().toString().equals("")) {
+                if ((et_regcid_spot.getText().toString().equals("") || et_last_num_spot.getText().toString().equals("")) && regNoFLG) {
                     showToast("Please Enter Proper Vehicle Number");
-                } else {
+                } else if (et_RegTRCsEnNo.getText().toString().trim().isEmpty() && !regNoFLG){
+                    showToast("Please Enter Proper Number");
+                }else {
                     if (isOnline()) {
 
                         new Async_VehicleCategory().execute();
@@ -1426,9 +1492,9 @@ public class SpotChallan extends AppCompatActivity
 
                 if (Dashboard.check_vhleHistory_or_Spot.equals("towing")) {
                     star.setVisibility(View.INVISIBLE);
-                    if (et_regcid_spot.getText().toString().trim().equals("")) {
+                    if (et_regcid_spot.getText().toString().trim().equals("") && regNoFLG) {
                         et_regcid_spot.setError(Html.fromHtml("<font color='black'>Enter Registration Code</font>"));
-                    } else if (et_last_num_spot.getText().toString().trim().equals("")) {
+                    } else if (et_last_num_spot.getText().toString().trim().equals("") && regNoFLG) {
                         et_last_num_spot.setError(Html.fromHtml("<font color='black'>Enter Vehicle Code</font>"));
                     } else if (btn_wheller_code.getText().toString().trim()
                             .equals("" + getString(R.string.select_wheeler_code))) {
@@ -1457,16 +1523,18 @@ public class SpotChallan extends AppCompatActivity
                                                 || !et_aadharnumber_spot.getText().toString().trim().equals("")
                                                 || et_aadharnumber_spot.getText().toString().trim().equals("")) {
                                             status = 0;
-                                            completeVehicle_num_send = "";// AP09CC3014
-                                            regncode_send = "";// AP09
-                                            regnName_send = "";
-                                            vehicle_num_send = "";// 3014
+                                            /*if (regNoFLG) {
+                                                completeVehicle_num_send = "";// AP09CC3014
+                                                regncode_send = "";// AP09
+                                                regnName_send = "";
+                                                vehicle_num_send = "";// 3014
 
-                                            regncode_send = et_regcid_spot.getText().toString().trim().toUpperCase();
-                                            regnName_send = "" + et_vchl_num_spot.getText().toString().toUpperCase();
-                                            vehicle_num_send = et_last_num_spot.getText().toString().trim().toUpperCase();
-                                            completeVehicle_num_send = ("" + regncode_send + "" + regnName_send + ""
-                                                    + vehicle_num_send);
+                                                regncode_send = et_regcid_spot.getText().toString().trim().toUpperCase();
+                                                regnName_send = "" + et_vchl_num_spot.getText().toString().toUpperCase();
+                                                vehicle_num_send = et_last_num_spot.getText().toString().trim().toUpperCase();
+                                                completeVehicle_num_send = ("" + regncode_send + "" + regnName_send + ""
+                                                        + vehicle_num_send);
+                                            }*/
 
                                             getDateAndTime();
                                             int pos = 0;
@@ -1518,7 +1586,7 @@ public class SpotChallan extends AppCompatActivity
                                     break;
 
                                 } else {
-                                    completeVehicle_num_send = "";// AP09CC3014
+                                    /*completeVehicle_num_send = "";// AP09CC3014
                                     regncode_send = "";// AP09
                                     regnName_send = "";
                                     vehicle_num_send = "";// 3014
@@ -1528,7 +1596,7 @@ public class SpotChallan extends AppCompatActivity
                                     vehicle_num_send = et_last_num_spot.getText().toString().trim().toUpperCase();
 
                                     completeVehicle_num_send = ("" + regncode_send + "" + regnName_send + ""
-                                            + vehicle_num_send);
+                                            + vehicle_num_send);*/
 
                                     getDateAndTime();
                                     int pos = 0;
@@ -1573,7 +1641,7 @@ public class SpotChallan extends AppCompatActivity
                                     }
                                 }
                             } else {
-                                completeVehicle_num_send = "";// AP09CC3014
+                                /*completeVehicle_num_send = "";// AP09CC3014
                                 regncode_send = "";// AP09
                                 regnName_send = "";
                                 vehicle_num_send = "";// 3014
@@ -1583,7 +1651,7 @@ public class SpotChallan extends AppCompatActivity
                                 vehicle_num_send = et_last_num_spot.getText().toString().trim().toUpperCase();
 
                                 completeVehicle_num_send = ("" + regncode_send + "" + regnName_send + ""
-                                        + vehicle_num_send);
+                                        + vehicle_num_send);*/
 
                                 getDateAndTime();
                                 int pos = 0;
@@ -1652,7 +1720,7 @@ public class SpotChallan extends AppCompatActivity
                                 violations_details_send = new StringBuffer("");
                                 violations_details_send.delete(0, violations_details_send.length());
 
-                                completeVehicle_num_send = "";// AP09CC3014
+                                /*completeVehicle_num_send = "";// AP09CC3014
                                 regncode_send = "";// AP09
                                 regnName_send = "";
                                 vehicle_num_send = "";// 3014
@@ -1662,7 +1730,7 @@ public class SpotChallan extends AppCompatActivity
                                 vehicle_num_send = et_last_num_spot.getText().toString().trim().toUpperCase();
 
                                 completeVehicle_num_send = ("" + regncode_send + "" + regnName_send + ""
-                                        + vehicle_num_send);
+                                        + vehicle_num_send);*/
 
                                 getDateAndTime();
                                 int pos = 0;
@@ -1743,7 +1811,7 @@ public class SpotChallan extends AppCompatActivity
                                 String threeWheeler = tv_vhle_no_spot.getText().toString().trim();
                                 violations_details_send = new StringBuffer("");
                                 violations_details_send.delete(0, violations_details_send.length());
-                                completeVehicle_num_send = "";// AP09CC3014
+                                /*completeVehicle_num_send = "";// AP09CC3014
                                 regncode_send = "";// AP09
                                 regnName_send = "";
                                 vehicle_num_send = "";// 3014
@@ -1751,7 +1819,7 @@ public class SpotChallan extends AppCompatActivity
                                 regnName_send = "" + et_vchl_num_spot.getText().toString().trim().toUpperCase();
                                 vehicle_num_send = et_last_num_spot.getText().toString().trim().toUpperCase();
                                 completeVehicle_num_send = ("" + regncode_send + "" + regnName_send + ""
-                                        + vehicle_num_send);
+                                        + vehicle_num_send);*/
                                 getDateAndTime();
                                 int pos = 0;
 
@@ -1841,13 +1909,13 @@ public class SpotChallan extends AppCompatActivity
 
                 } else if ((Dashboard.check_vhleHistory_or_Spot.equals("spot"))) {
 
-                    String vehicle_split = et_regcid_spot.getText().toString().trim().substring(0, 2);
+                    /*String vehicle_split = et_regcid_spot.getText().toString().trim().substring(0, 2);
 
                     if (!vehicle_split.equals("AP") && !vehicle_split.equals("TS")) {
                         otherStateVehicle = "NO";
                     } else {
                         otherStateVehicle = "NO";
-                    }
+                    }*/
 
                     if (!et_driver_lcnce_num_spot.getText().toString().equalsIgnoreCase("")
                             || !et_driver_lcnce_num_spot.getText().toString().equalsIgnoreCase(null)) {
@@ -1903,7 +1971,7 @@ public class SpotChallan extends AppCompatActivity
                                 violations_details_send = new StringBuffer("");
                                 violations_details_send.delete(0, violations_details_send.length());
 
-                                completeVehicle_num_send = "";// AP09CC3014
+                               /* completeVehicle_num_send = "";// AP09CC3014
                                 regncode_send = "";// AP09
                                 regnName_send = "";
                                 vehicle_num_send = "";// 3014
@@ -1913,7 +1981,7 @@ public class SpotChallan extends AppCompatActivity
                                 vehicle_num_send = et_last_num_spot.getText().toString().trim().toUpperCase();
 
                                 completeVehicle_num_send = ("" + regncode_send + "" + regnName_send + ""
-                                        + vehicle_num_send);
+                                        + vehicle_num_send);*/
 
                                 getDateAndTime();
                                 int pos = 0;
@@ -1991,7 +2059,7 @@ public class SpotChallan extends AppCompatActivity
                                     violations_details_send = new StringBuffer("");
                                     violations_details_send.delete(0, violations_details_send.length());
 
-                                    completeVehicle_num_send = "";// AP09CC3014
+                                    /*completeVehicle_num_send = "";// AP09CC3014
                                     regncode_send = "";// AP09
                                     regnName_send = "";
                                     vehicle_num_send = "";// 3014
@@ -2001,7 +2069,7 @@ public class SpotChallan extends AppCompatActivity
                                     vehicle_num_send = et_last_num_spot.getText().toString().trim().toUpperCase();
 
                                     completeVehicle_num_send = ("" + regncode_send + "" + regnName_send + ""
-                                            + vehicle_num_send);
+                                            + vehicle_num_send);*/
 
                                     getDateAndTime();
                                     int pos = 0;
@@ -2564,9 +2632,14 @@ public class SpotChallan extends AppCompatActivity
         @Override
         protected String doInBackground(Void... params) {
             message = new StringBuffer();
-            completeVehicle_num_send = ("" + regncode_send + "" + regnName_send + "" + vehicle_num_send);
+            if (regNoFLG) {
+                completeVehicle_num_send = ("" + regncode_send + "" + regnName_send + "" + vehicle_num_send);
+            } else {
+                completeVehicle_num_send = et_RegTRCsEnNo.getText().toString().trim();
+            }
             try {
-                ServiceHelper.getRTADetails("" + completeVehicle_num_send);
+                // ServiceHelper.getRTADetails("" + completeVehicle_num_send);
+                ServiceHelper.getVehicleDetailsByany(isVehicleInfoKey, "" + completeVehicle_num_send);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -2611,19 +2684,6 @@ public class SpotChallan extends AppCompatActivity
 //                start = System.currentTimeMillis();
 //                Log.i("TIME>>>START>>>Async_getOffenderRemarks",String.valueOf(start));
 
-                if (isOnline()) {
-
-                    Async_getOffenderRemarks offender_task = new Async_getOffenderRemarks();
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-                        Thread.currentThread().setPriority(Thread.MIN_PRIORITY);
-
-                        offender_task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-                    } else {
-                        offender_task.execute();
-                    }
-
-                }
-
 
                 try {
 
@@ -2653,12 +2713,13 @@ public class SpotChallan extends AppCompatActivity
                     } else {
                         btn_wheller_code.setClickable(true);
                     }
-
+                    completeVehicle_num_send = "" + rta_details_spot_master[24] != null ? rta_details_spot_master[24] : "NA";
+                    Log.d("RTA", "" + completeVehicle_num_send);
 
                     // start to display details as card system
                     rl_rta_details_layout.setVisibility(View.VISIBLE);
-                    tv_vehicle_details_header_spot.setText("VEHICLE DETAILS");
-                    tv_vhle_no_spot.setText("" + completeVehicle_num_send);
+                    tv_vehicle_details_header_spot.setText("VEHICLE DETAILS"); //
+                    tv_vhle_no_spot.setText("" + rta_details_spot_master[24] != null ? rta_details_spot_master[24] : "NA");
                     tv_owner_name_spot.setText("" + rta_details_spot_master[1] != null ? rta_details_spot_master[1] : "NA");
                     tv_address_spot.setText("" + rta_details_spot_master[2] != null ? rta_details_spot_master[2] : "NA" + ", " + rta_details_spot_master[3] != null ? rta_details_spot_master[3] : "NA");
                     // tv_city_spot.setText("" + rta_details_spot_master[3]);
@@ -2723,7 +2784,6 @@ public class SpotChallan extends AppCompatActivity
                             }
                         }
 
-
                         /*
                          * if
                          * ((!rta_details_spot_master[10].toString().trim().equals
@@ -2732,6 +2792,27 @@ public class SpotChallan extends AppCompatActivity
                     } else {
                         ll_drivertype_rgbtn.setVisibility(View.GONE);
                         ll_is_owner_driver.setVisibility(View.VISIBLE);
+                    }
+                    if (isOnline()) {
+
+                        Async_getOffenderRemarks offender_task = new Async_getOffenderRemarks();
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+                            Thread.currentThread().setPriority(Thread.MIN_PRIORITY);
+
+                            offender_task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+                        } else {
+                            offender_task.execute();
+                        }
+
+                    }
+                    if (isOnline()) {
+                        Async_getPendingChallans pending_task = new Async_getPendingChallans();
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+                            Thread.currentThread().setPriority(Thread.NORM_PRIORITY);
+                            pending_task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+                        } else {
+                            pending_task.execute();
+                        }
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -2970,6 +3051,8 @@ public class SpotChallan extends AppCompatActivity
             String pidName = sharedPreference.getString("PID_NAME", "");
             String pswd = sharedPreference.getString("PASS_WORD", ""); // PASS_WORD
 
+            Log.d("Pending", "" + completeVehicle_num_send);
+
             ServiceHelper.getpendingChallansByRegNo("" + completeVehicle_num_send, "" + "", "" + "", "" + pidCd,
                     "" + pidName, "" + pswd, "" + simid_send, "" + imei_send, "" + latitude, "" + longitude, "", "23");
             return null;
@@ -3044,6 +3127,7 @@ public class SpotChallan extends AppCompatActivity
     public class Async_getOffenderRemarks extends AsyncTask<Void, Void, String> {
         @Override
         protected String doInBackground(Void... params) {
+            Log.d("OFFENDER", "" + completeVehicle_num_send);
             try {
                 ServiceHelper.getOffenderRemarks(completeVehicle_num_send,
                         "" + et_driver_lcnce_num_spot.getText().toString().trim(),
@@ -3272,6 +3356,7 @@ public class SpotChallan extends AppCompatActivity
     public class Async_getDetainedItems extends AsyncTask<Void, Void, String> {
         @Override
         protected String doInBackground(Void... params) {
+            Log.d("Detained", "" + completeVehicle_num_send);
 
             ServiceHelper.getDetainedItemsList("" + completeVehicle_num_send, "" + Dashboard.UNIT_CODE);
             return null;
@@ -3949,7 +4034,7 @@ public class SpotChallan extends AppCompatActivity
                     btn_sendOTPtoMobileCall.setVisibility(View.GONE);
                     tv_spotChallanTwo_header.setText("" + getResources().getString(R.string.towing_one_line));
 
-                    String vehicle_split = et_regcid_spot.getText().toString().trim().substring(0, 2);
+                    String vehicle_split = completeVehicle_num_send.substring(0, 2);
                     // ***3-WHEELER CONDITION****//*
                     String three_wheeler = btn_wheller_code.getText().toString().trim();
 
@@ -4227,7 +4312,7 @@ public class SpotChallan extends AppCompatActivity
 //                        btn_send_otp_to_mobile.setVisibility(View.GONE);
 //                    }
 
-                    String vehicle_split = et_regcid_spot.getText().toString().trim().substring(0, 2);
+                    String vehicle_split = completeVehicle_num_send.substring(0, 2);
                     // ***3-WHEELER CONDITION****//*
                     String three_wheeler = btn_wheller_code.getText().toString().trim();
 
@@ -4495,7 +4580,7 @@ public class SpotChallan extends AppCompatActivity
 
                     is_it_spot_send = "0";//
 
-                    String vehicle_split = et_regcid_spot.getText().toString().trim().substring(0, 2);
+                    String vehicle_split = completeVehicle_num_send.substring(0, 2);
                     if (radioGroupButton_spotpaymentNo.isChecked()) {
                         if (vehicle_split.equals("AP") || vehicle_split.equals("TS")) {
                             radioGroupButton_spotpaymentYes.setEnabled(true);
@@ -4633,7 +4718,7 @@ public class SpotChallan extends AppCompatActivity
 
                     is_it_spot_send = "0";//
 
-                    String vehicle_split = et_regcid_spot.getText().toString().trim().substring(0, 2);
+                    String vehicle_split = completeVehicle_num_send.substring(0, 2);
                     if (radioGroupButton_spotpaymentNo.isChecked()) {
                         if (vehicle_split.equals("AP") || vehicle_split.equals("TS")) {
                             radioGroupButton_spotpaymentYes.setEnabled(true);
@@ -4885,7 +4970,7 @@ public class SpotChallan extends AppCompatActivity
                                 || (Dashboard.check_vhleHistory_or_Spot.equals("spot"))
                                 || (Dashboard.check_vhleHistory_or_Spot.equals("towing"))) {
 
-                            String vehicle_split = et_regcid_spot.getText().toString().trim().substring(0, 2);
+                            String vehicle_split = completeVehicle_num_send.substring(0, 2);
                             if (radioGroupButton_spotpaymentNo.isChecked()) {
 
                                 rl_detained_items.setVisibility(View.VISIBLE);
@@ -5667,6 +5752,7 @@ public class SpotChallan extends AppCompatActivity
                 present_date_toSend = "";
 
             }
+            Log.d("OTP", "" + completeVehicle_num_send);
 
             ServiceHelper.sendOTPtoMobile(completeVehicle_num_send, et_driver_contact_spot.getText().toString().trim(),
                     "" + getDate().toUpperCase(), smsMode, challan_Type);
@@ -7604,7 +7690,7 @@ public class SpotChallan extends AppCompatActivity
                                 } else if (govt_vehcle.isChecked()) {
                                     is_govt_police = "4";
                                 }*/
-                                String vehicle_split2 = et_regcid_spot.getText().toString().trim().substring(0, 2);
+                                String vehicle_split2 = completeVehicle_num_send.substring(0, 2);
                                 if ((vehicle_split2.equals("AP") || vehicle_split2.equals("TS"))
                                         && chck_detainedItems_none.isChecked()
                                         && radioGroupButton_spotpaymentNo.isChecked()
@@ -8139,111 +8225,116 @@ public class SpotChallan extends AppCompatActivity
     }
 
     public void Asyncallsofmethods() {
-        if (isitTr == 1 || regNoFLG == true) {
+        // if (isitTr == 1 || regNoFLG == true) {
 
-            if (et_regcid_spot.getText().toString().equals("")) {
-                et_regcid_spot.setError(Html.fromHtml("<font color='black'>Enter Registration Code</font>"));
-                et_regcid_spot.requestFocus();
+        if (et_regcid_spot.getText().toString().equals("") && regNoFLG) {
+            et_regcid_spot.setError(Html.fromHtml("<font color='black'>Enter Registration Code</font>"));
+            et_regcid_spot.requestFocus();
 
-            } else if (et_last_num_spot.getText().toString().equals("")) {
-                et_last_num_spot.setError(Html.fromHtml("<font color='black'>Enter Vehicle Code</font>"));
-                et_last_num_spot.requestFocus();
+        } else if (et_last_num_spot.getText().toString().equals("") && regNoFLG) {
+            et_last_num_spot.setError(Html.fromHtml("<font color='black'>Enter Vehicle Code</font>"));
+            et_last_num_spot.requestFocus();
 
-            } else if (!et_regcid_spot.getText().toString().equals("")
-                    && !et_last_num_spot.getText().toString().equals("")) {
-                // //new Async_checkAadhaarExists().execute();
-                if ("N".equals(rta_data_flg.trim().toUpperCase())) {
-                    // IF NO DATA FOUND FILL THE DETAILS MANUALLY
-                    ll_is_owner_driver.setVisibility(View.VISIBLE);
-                } else {
+        } else if (et_RegTRCsEnNo.getText().toString().trim().isEmpty() && !regNoFLG) {
+            et_RegTRCsEnNo.setError(Html.fromHtml("<font color='white'>Please enter the value</font>"));
+            et_RegTRCsEnNo.requestFocus();
+        } else if (et_RegTRCsEnNo.getText().toString().trim().startsWith("0") && !regNoFLG) {
+            et_RegTRCsEnNo.setError(Html.fromHtml("<font color='white'>Please enter valid number</font>"));
+            et_RegTRCsEnNo.requestFocus();
+        } else {
+            // //new Async_checkAadhaarExists().execute();
+            if ("N".equals(rta_data_flg.trim().toUpperCase())) {
+                // IF NO DATA FOUND FILL THE DETAILS MANUALLY
+                ll_is_owner_driver.setVisibility(View.VISIBLE);
+            } else {
 
-                    regncode_send = "" + et_regcid_spot.getText().toString().trim().toUpperCase();
-                    regnName_send = "" + et_vchl_num_spot.getText().toString().toUpperCase();
-                    vehicle_num_send = "" + et_last_num_spot.getText().toString().trim().toUpperCase();
+                regncode_send = "" + et_regcid_spot.getText().toString().trim().toUpperCase();
+                regnName_send = "" + et_vchl_num_spot.getText().toString().toUpperCase();
+                vehicle_num_send = "" + et_last_num_spot.getText().toString().trim().toUpperCase();
 
-                    aadhaar = et_aadharnumber_spot.getText().toString().trim();
-                    licence_no = et_driver_lcnce_num_spot.getText().toString().trim();
+                aadhaar = et_aadharnumber_spot.getText().toString().trim();
+                licence_no = et_driver_lcnce_num_spot.getText().toString().trim();
 
-                    et_drivername_iOD.setText("");
-                    et_driverFatherName_iOD.setText("");
-                    et_driver_address_iOD.setText("");
-                    et_driver_city_iOD.setText("");
+                et_drivername_iOD.setText("");
+                et_driverFatherName_iOD.setText("");
+                et_driver_address_iOD.setText("");
+                et_driver_city_iOD.setText("");
 
 
-                    if (isOnline()) {
+                if (isOnline()) {
 
-                        rl_rta_details_layout.setVisibility(View.GONE);
-                        rl_licence_details_layout.setVisibility(View.GONE);
-                        ll_aadhar_layout.setVisibility(View.GONE);
+                    rl_rta_details_layout.setVisibility(View.GONE);
+                    rl_licence_details_layout.setVisibility(View.GONE);
+                    ll_aadhar_layout.setVisibility(View.GONE);
 
 
 //                        start = System.currentTimeMillis();
 //                        Log.i("TIME>>>START>>>Async_getRTADetails", String.valueOf(start));
 
-                        if (isOnline()) {
-                            Async_getRTADetails rta_task = new Async_getRTADetails();
-                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-                                Thread.currentThread().setPriority(Thread.MAX_PRIORITY);
-                                rta_task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-                            } else {
-                                rta_task.execute();
-                            }
+                    if (isOnline()) {
+                        Async_getRTADetails rta_task = new Async_getRTADetails();
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+                            Thread.currentThread().setPriority(Thread.MAX_PRIORITY);
+                            rta_task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+                        } else {
+                            rta_task.execute();
                         }
+                    }
 
-                        if (et_driver_lcnce_num_spot.getText() != null && !et_driver_lcnce_num_spot.getText().toString().trim().equals("")) {
+                    if (et_driver_lcnce_num_spot.getText() != null && !et_driver_lcnce_num_spot.getText().toString().trim().equals("")) {
 
 //                            start = System.currentTimeMillis();
 //                            Log.i("TIME>>>START>>>Async_getLicenceDetails",String.valueOf(start));
 
-                            if (isOnline()) {
-                                Async_getLicenceDetails dl_task = new Async_getLicenceDetails();
-                                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-                                    Thread.currentThread().setPriority(Thread.MAX_PRIORITY);
-                                    dl_task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-                                } else {
-                                    dl_task.execute();
-                                }
+                        if (isOnline()) {
+                            Async_getLicenceDetails dl_task = new Async_getLicenceDetails();
+                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+                                Thread.currentThread().setPriority(Thread.MAX_PRIORITY);
+                                dl_task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+                            } else {
+                                dl_task.execute();
                             }
                         }
-                        if (et_aadharnumber_spot.getText() != null
-                                && et_aadharnumber_spot.getText().toString().trim().length() >= 1
-                                && (!ver.isValid(et_aadharnumber_spot.getText().toString()))) {
-                            showToast("Please Enter Valid Adhaar Number");
-                            et_aadharnumber_spot.setError(
-                                    Html.fromHtml("<font color='black'>Please Enter Valid Adhaar Number</font>"));
-                        } else if ((et_aadharnumber_spot.getText().toString().trim().length() == 12)
-                                || (et_aadharnumber_spot.getText().toString().trim().length() == 28)) {
-                            if (isOnline()) {
+                    }
+                    if (et_aadharnumber_spot.getText() != null
+                            && et_aadharnumber_spot.getText().toString().trim().length() >= 1
+                            && (!ver.isValid(et_aadharnumber_spot.getText().toString()))) {
+                        showToast("Please Enter Valid Adhaar Number");
+                        et_aadharnumber_spot.setError(
+                                Html.fromHtml("<font color='black'>Please Enter Valid Adhaar Number</font>"));
+                    } else if ((et_aadharnumber_spot.getText().toString().trim().length() == 12)
+                            || (et_aadharnumber_spot.getText().toString().trim().length() == 28)) {
+                        if (isOnline()) {
 //                                start = System.currentTimeMillis();
 //                                Log.i("TIME>>>START>>>Async_getAadharDetails",String.valueOf(start));
-                                Async_getAadharDetails adhar_task = new Async_getAadharDetails();
-                                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-                                    Thread.currentThread().setPriority(Thread.MAX_PRIORITY);
-                                    adhar_task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-                                } else {
-                                    adhar_task.execute();
-                                }
+                            Async_getAadharDetails adhar_task = new Async_getAadharDetails();
+                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+                                Thread.currentThread().setPriority(Thread.MAX_PRIORITY);
+                                adhar_task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+                            } else {
+                                adhar_task.execute();
                             }
                         }
+                    }
 
 //                        start = System.currentTimeMillis();
 //                        Log.i("TIME>>>START>>>Async_getPendingChallans",String.valueOf(start));
 
-                        if (isOnline()) {
-                            Async_getPendingChallans pending_task = new Async_getPendingChallans();
-                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-                                Thread.currentThread().setPriority(Thread.NORM_PRIORITY);
-                                pending_task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-                            } else {
-                                pending_task.execute();
-                            }
+                   /* if (isOnline()) {
+                        Async_getPendingChallans pending_task = new Async_getPendingChallans();
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+                            Thread.currentThread().setPriority(Thread.NORM_PRIORITY);
+                            pending_task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+                        } else {
+                            pending_task.execute();
                         }
-                    } else {
-                        showToast("" + getResources().getString(R.string.newtork_txt));
-                    }
+                    }*/
+                } else {
+                    showToast("" + getResources().getString(R.string.newtork_txt));
                 }
             }
         }
+        //  }
     }
 
     @SuppressLint("StaticFieldLeak")
@@ -8381,7 +8472,7 @@ public class SpotChallan extends AppCompatActivity
         // validate offence code64 w/o DL
         if ("0".equals(imgSelected)) {
             showToast(" Please Take Driver's Photo ! ");
-        }else if (!et_driver_lcnce_num_spot.getText().toString().isEmpty() && !isDL_DataAvailable && !isDL_Captured){
+        } else if (!et_driver_lcnce_num_spot.getText().toString().isEmpty() && !isDL_DataAvailable && !isDL_Captured) {
             showToast("  Please Capture DL Photo ! ");
         }
        /* if ("0".equals(imgSelected) && vioDetainCheckFlag.equals("1")) {
@@ -8389,11 +8480,11 @@ public class SpotChallan extends AppCompatActivity
         } else if ("0".equals(imgSelected) && imageFlag.equals("1")) {
             showToast("Please Take Driver's Photo !");
         }*/
-        else if (et_regcid_spot.getText().toString().trim().equals("")) {
+        else if (et_regcid_spot.getText().toString().trim().equals("") && regNoFLG) {
             System.out.println(">>>>>>>>2");
             et_regcid_spot.setError(Html.fromHtml("<font color='black'>Enter Registration Code</font>"));
 
-        } else if (et_last_num_spot.getText().toString().trim().equals("")) {
+        } else if (et_last_num_spot.getText().toString().trim().equals("") && regNoFLG) {
             System.out.println(">>>>>>>>3");
             et_last_num_spot.setError(Html.fromHtml("<font color='black'>Enter Vehicle Code</font>"));
 
@@ -8449,7 +8540,7 @@ public class SpotChallan extends AppCompatActivity
                                 violation_code = "30";
                                 spotPamentFLG = false;
                                 status = 0;
-                                completeVehicle_num_send = "";// AP09CC3014
+                                /*completeVehicle_num_send = "";// AP09CC3014
                                 regncode_send = "";// AP09
                                 regnName_send = "";
                                 vehicle_num_send = "";// 3014
@@ -8459,7 +8550,7 @@ public class SpotChallan extends AppCompatActivity
                                 vehicle_num_send = et_last_num_spot.getText().toString().trim().toUpperCase();
 
                                 completeVehicle_num_send = ("" + regncode_send + "" + regnName_send + ""
-                                        + vehicle_num_send);
+                                        + vehicle_num_send);*/
 
                                 getDateAndTime();
                                 int pos = 0;
@@ -8534,7 +8625,7 @@ public class SpotChallan extends AppCompatActivity
                                 spotPamentFLG = true;
 
                                 status = 0;
-                                completeVehicle_num_send = "";// AP09CC3014
+                                /*completeVehicle_num_send = "";// AP09CC3014
                                 regncode_send = "";// AP09
                                 regnName_send = "";
                                 vehicle_num_send = "";// 3014
@@ -8544,7 +8635,7 @@ public class SpotChallan extends AppCompatActivity
                                 vehicle_num_send = et_last_num_spot.getText().toString().trim().toUpperCase();
 
                                 completeVehicle_num_send = ("" + regncode_send + "" + regnName_send + ""
-                                        + vehicle_num_send);
+                                        + vehicle_num_send);*/
 
                                 getDateAndTime();
                                 int pos = 0;
@@ -8661,7 +8752,7 @@ public class SpotChallan extends AppCompatActivity
 
                                 spotPamentFLG = true;
                                 status = 0;
-                                completeVehicle_num_send = "";// AP09CC3014
+                                /*completeVehicle_num_send = "";// AP09CC3014
                                 regncode_send = "";// AP09
                                 regnName_send = "";
                                 vehicle_num_send = "";// 3014
@@ -8671,7 +8762,7 @@ public class SpotChallan extends AppCompatActivity
                                 vehicle_num_send = et_last_num_spot.getText().toString().trim().toUpperCase();
 
                                 completeVehicle_num_send = ("" + regncode_send + "" + regnName_send + ""
-                                        + vehicle_num_send);
+                                        + vehicle_num_send);*/
 
                                 getDateAndTime();
                                 int pos = 0;
@@ -8738,7 +8829,7 @@ public class SpotChallan extends AppCompatActivity
 
                                 spotPamentFLG = false;
                                 status = 0;
-                                completeVehicle_num_send = "";// AP09CC3014
+                                /*completeVehicle_num_send = "";// AP09CC3014
                                 regncode_send = "";// AP09
                                 regnName_send = "";
                                 vehicle_num_send = "";// 3014
@@ -8747,7 +8838,7 @@ public class SpotChallan extends AppCompatActivity
                                 regnName_send = "" + et_vchl_num_spot.getText().toString().toUpperCase();
                                 vehicle_num_send = et_last_num_spot.getText().toString().trim().toUpperCase();
                                 completeVehicle_num_send = ("" + regncode_send + "" + regnName_send + ""
-                                        + vehicle_num_send);
+                                        + vehicle_num_send);*/
 
                                 getDateAndTime();
                                 int pos = 0;
@@ -8826,7 +8917,7 @@ public class SpotChallan extends AppCompatActivity
 
                         /* 19_APRIL_2017 */
                     } else {
-                        completeVehicle_num_send = "";// AP09CC3014
+                       /* completeVehicle_num_send = "";// AP09CC3014
                         regncode_send = "";// AP09
                         regnName_send = "";
                         vehicle_num_send = "";// 3014
@@ -8836,7 +8927,7 @@ public class SpotChallan extends AppCompatActivity
                         vehicle_num_send = et_last_num_spot.getText().toString().trim().toUpperCase();
 
                         completeVehicle_num_send = ("" + regncode_send + "" + regnName_send + ""
-                                + vehicle_num_send);
+                                + vehicle_num_send);*/
 
                         getDateAndTime();
                         int pos = 0;
@@ -8897,7 +8988,7 @@ public class SpotChallan extends AppCompatActivity
                         }
                     }
                 } else {
-                    completeVehicle_num_send = "";// AP09CC3014
+                    /*completeVehicle_num_send = "";// AP09CC3014
                     regncode_send = "";// AP09
                     regnName_send = "";
                     vehicle_num_send = "";// 3014
@@ -8907,7 +8998,7 @@ public class SpotChallan extends AppCompatActivity
                     vehicle_num_send = et_last_num_spot.getText().toString().trim().toUpperCase();
 
                     completeVehicle_num_send = ("" + regncode_send + "" + regnName_send + ""
-                            + vehicle_num_send);
+                            + vehicle_num_send);*/
 
                     getDateAndTime();
                     int pos = 0;

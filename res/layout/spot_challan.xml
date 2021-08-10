@@ -246,7 +246,7 @@
                         android:paddingStart="@dimen/header_grnt_padding_ten"
                         android:paddingEnd="@dimen/header_grnt_padding_ten"
                         android:text="@string/engine"
-                        android:visibility="gone" />
+                        android:visibility="visible" />
 
                     <RadioButton
                         android:id="@+id/radioGroupButton_chasisNo"
@@ -256,7 +256,17 @@
                         android:paddingStart="@dimen/header_grnt_padding_ten"
                         android:paddingEnd="@dimen/header_grnt_padding_ten"
                         android:text="@string/chasis"
-                        android:visibility="gone" />
+                        android:visibility="visible" />
+
+                    <RadioButton
+                        android:id="@+id/radioGroupButton_TrNo"
+                        style="@style/dd_custom_radio_btn_style_isDriver_isOwner"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingStart="@dimen/header_grnt_padding_ten"
+                        android:paddingEnd="@dimen/header_grnt_padding_ten"
+                        android:text="TR No"
+                        android:visibility="visible" />
                 </RadioGroup>
             </LinearLayout>
 
@@ -266,7 +276,8 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/ll_radiotype"
                 android:layout_centerHorizontal="true"
-                android:weightSum="4">
+                android:weightSum="4"
+                android:visibility="visible">
 
                 <EditText
                     android:id="@+id/edt_regncid_spotchallan_xml"
@@ -310,32 +321,63 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/ll_engineNo"
+                android:id="@+id/lyt_RegTRCsEnNo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/ll_regno"
                 android:layout_marginTop="@dimen/header_grnt_padding_ten"
+                android:weightSum="3"
+                android:visibility="gone">
+
+                <TextView
+                    android:id="@+id/tv_RegTRCsEnNo"
+                    style="@style/navi_text_style"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1"
+                    android:text="@string/regNo" />
+
+                <EditText
+                    android:id="@+id/et_RegTRCsEnNo"
+                    style="@style/edt_custom_style"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:digits="0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+                    android:gravity="center"
+                    android:inputType="text|textCapCharacters"
+                    android:maxLength="25"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_engineNo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/lyt_RegTRCsEnNo"
+                android:layout_marginTop="@dimen/header_grnt_padding_ten"
+                android:weightSum="3"
                 android:visibility="gone">
 
                 <TextView
                     android:id="@+id/enginetext"
                     style="@style/navi_text_style"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:layout_weight="0.7"
+                    android:layout_weight="1"
                     android:text="@string/engine" />
 
                 <EditText
                     android:id="@+id/et_engineNo"
                     style="@style/edt_custom_style"
-                    android:layout_width="80dp"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="2.17"
+                    android:layout_weight="2"
                     android:digits="0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"
                     android:gravity="center"
                     android:inputType="text|textCapCharacters"
-                    android:maxLength="25"></EditText>
+                    android:maxLength="25"/>
             </LinearLayout>
 
             <LinearLayout
@@ -344,27 +386,28 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/ll_engineNo"
                 android:layout_marginTop="@dimen/header_grnt_padding_ten"
+                android:weightSum="3"
                 android:visibility="gone">
 
                 <TextView
                     android:id="@+id/chasistext"
                     style="@style/navi_text_style"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:layout_weight="0.75"
+                    android:layout_weight="1"
                     android:text="@string/chasis" />
 
                 <EditText
                     android:id="@+id/et_chasisNo"
                     style="@style/edt_custom_style"
-                    android:layout_width="80dp"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="2.17"
+                    android:layout_weight="2"
                     android:digits="0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"
                     android:gravity="center"
                     android:inputType="text|textCapCharacters"
-                    android:maxLength="25"></EditText>
+                    android:maxLength="25"/>
             </LinearLayout>
 
             <LinearLayout
@@ -377,18 +420,18 @@
                 <TextView
                     android:id="@+id/textView4"
                     style="@style/navi_text_style"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:layout_weight="0.19"
+                    android:layout_weight="1"
                     android:text="@string/driver_lcnce_no" />
 
                 <EditText
                     android:id="@+id/edt_driverdlno_spotchallan_xml"
                     style="@style/edt_custom_style"
-                    android:layout_width="80dp"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="2.17"
+                    android:layout_weight="2"
                     android:digits="0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ/"
                     android:gravity="center"
                     android:inputType="text|textCapCharacters"
@@ -1616,7 +1659,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/ll_drivertype_spot_xml"
                     android:orientation="vertical"
-                    android:visibility="gone">
+                    android:visibility="visible">
 
                     <TextView
                         style="@style/navi_text_style"
