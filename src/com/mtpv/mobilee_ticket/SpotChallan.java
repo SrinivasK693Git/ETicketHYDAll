@@ -262,7 +262,7 @@ public class SpotChallan extends AppCompatActivity
     public static EditText et_passport;
     public static String citizen_status = "indian", helmetcases = "0";
     public static RadioGroup radioGrp_regNo_EngnNo_Chasis;
-    public static RadioButton radioGroupButton_regNo, radioGroupButton_engineNo, radioGroupButton_chasisNo;
+    public static RadioButton radioGroupButton_regNo, radioGroupButton_engineNo, radioGroupButton_chasisNo,radioGroupButton_TrNo;
     public static LinearLayout ll_mainsub_root, ll_engineNo, ll_chasisNo, ll_regno, lyt_RegTRCsEnNo;
     public static EditText et_engineNo, et_chasisNo;
     public static boolean EngneFLG = false, regNoFLG = true, chasisFLG = false, veh_HisFLG = false;
@@ -396,6 +396,7 @@ public class SpotChallan extends AppCompatActivity
         btn_SlctLctn = findViewById(R.id.btn_SlctLctn);
         tv_RegTRCsEnNo = findViewById(R.id.tv_RegTRCsEnNo);
         et_RegTRCsEnNo = findViewById(R.id.et_RegTRCsEnNo);
+        radioGroupButton_TrNo=findViewById(R.id.radioGroupButton_TrNo);
         btn_vehCategory.setOnClickListener(this);
         btn_SlctLctn.setOnClickListener(this);
         imgvDL_camera_capture.setOnClickListener(this);
@@ -592,6 +593,10 @@ public class SpotChallan extends AppCompatActivity
 
     @SuppressLint("SetTextI18n")
     private void LoadUIcomponents() {
+        EngneFLG = false;
+        regNoFLG = true;
+        chasisFLG = false;
+        veh_HisFLG = false;
 
         et_regcid_spot = (EditText) findViewById(R.id.edt_regncid_spotchallan_xml);
         et_regcid_spot.setFocusable(true);
@@ -1366,8 +1371,10 @@ public class SpotChallan extends AppCompatActivity
                 int rg_iOD = rg_isOwner_isDriver.getCheckedRadioButtonId();
 
                 /*------is_driver/is_owner only for spot_challan : 29-01-2015------*/
-                if (et_regcid_spot.getText().toString().equals("") || et_last_num_spot.getText().toString().equals("")) {
+                if ((et_regcid_spot.getText().toString().equals("") || et_last_num_spot.getText().toString().equals("")) && regNoFLG) {
                     showToast("Please Enter Proper Vehicle Number");
+                } else if (et_RegTRCsEnNo.getText().toString().trim().isEmpty() && !regNoFLG) {
+                    showToast("Please Enter Proper Number");
                 } else {
                     if (isOnline()) {
                         SpotChallan.tv_grand_total_spot.setText("");
@@ -1386,7 +1393,7 @@ public class SpotChallan extends AppCompatActivity
             case R.id.btn_SlctLctn:
                 if ((et_regcid_spot.getText().toString().equals("") || et_last_num_spot.getText().toString().equals("")) && regNoFLG) {
                     showToast("Please Enter Proper Vehicle Number");
-                } else if (et_RegTRCsEnNo.getText().toString().trim().isEmpty() && !regNoFLG){
+                } else if (et_RegTRCsEnNo.getText().toString().trim().isEmpty() && !regNoFLG) {
                     showToast("Please Enter Proper Number");
                 } else {
                     if (isOnline()) {
@@ -1402,9 +1409,9 @@ public class SpotChallan extends AppCompatActivity
             case R.id.btn_vehCategory:
                 if ((et_regcid_spot.getText().toString().equals("") || et_last_num_spot.getText().toString().equals("")) && regNoFLG) {
                     showToast("Please Enter Proper Vehicle Number");
-                } else if (et_RegTRCsEnNo.getText().toString().trim().isEmpty() && !regNoFLG){
+                } else if (et_RegTRCsEnNo.getText().toString().trim().isEmpty() && !regNoFLG) {
                     showToast("Please Enter Proper Number");
-                }else {
+                } else {
                     if (isOnline()) {
 
                         new Async_VehicleCategory().execute();
@@ -1492,10 +1499,21 @@ public class SpotChallan extends AppCompatActivity
 
                 if (Dashboard.check_vhleHistory_or_Spot.equals("towing")) {
                     star.setVisibility(View.INVISIBLE);
-                    if (et_regcid_spot.getText().toString().trim().equals("") && regNoFLG) {
+
+                    if (et_regcid_spot.getText().toString().equals("") && regNoFLG) {
                         et_regcid_spot.setError(Html.fromHtml("<font color='black'>Enter Registration Code</font>"));
-                    } else if (et_last_num_spot.getText().toString().trim().equals("") && regNoFLG) {
+                        et_regcid_spot.requestFocus();
+
+                    } else if (et_last_num_spot.getText().toString().equals("") && regNoFLG) {
                         et_last_num_spot.setError(Html.fromHtml("<font color='black'>Enter Vehicle Code</font>"));
+                        et_last_num_spot.requestFocus();
+
+                    } else if (et_RegTRCsEnNo.getText().toString().trim().isEmpty() && !regNoFLG) {
+                        et_RegTRCsEnNo.setError(Html.fromHtml("<font color='white'>Please enter the value</font>"));
+                        et_RegTRCsEnNo.requestFocus();
+                    } else if (et_RegTRCsEnNo.getText().toString().trim().startsWith("0") && !regNoFLG) {
+                        et_RegTRCsEnNo.setError(Html.fromHtml("<font color='white'>Please enter valid number</font>"));
+                        et_RegTRCsEnNo.requestFocus();
                     } else if (btn_wheller_code.getText().toString().trim()
                             .equals("" + getString(R.string.select_wheeler_code))) {
                         showToast("Select Wheeler Code");
@@ -1708,10 +1726,21 @@ public class SpotChallan extends AppCompatActivity
                 if ((Dashboard.check_vhleHistory_or_Spot.equals("vehiclehistory"))
                         || (Dashboard.check_vhleHistory_or_Spot.equals("releasedocuments"))) {
 
-                    if (et_regcid_spot.getText().toString().trim().equals("")) {
-                        et_regcid_spot.setError(Html.fromHtml("<font color='black'>Enter Registration Code</font>"));
-                        showToast("Enter Registration Code");
 
+                    if (et_regcid_spot.getText().toString().equals("") && regNoFLG) {
+                        et_regcid_spot.setError(Html.fromHtml("<font color='black'>Enter Registration Code</font>"));
+                        et_regcid_spot.requestFocus();
+
+                    } else if (et_last_num_spot.getText().toString().equals("") && regNoFLG) {
+                        et_last_num_spot.setError(Html.fromHtml("<font color='black'>Enter Vehicle Code</font>"));
+                        et_last_num_spot.requestFocus();
+
+                    } else if (et_RegTRCsEnNo.getText().toString().trim().isEmpty() && !regNoFLG) {
+                        et_RegTRCsEnNo.setError(Html.fromHtml("<font color='white'>Please enter the value</font>"));
+                        et_RegTRCsEnNo.requestFocus();
+                    } else if (et_RegTRCsEnNo.getText().toString().trim().startsWith("0") && !regNoFLG) {
+                        et_RegTRCsEnNo.setError(Html.fromHtml("<font color='white'>Please enter valid number</font>"));
+                        et_RegTRCsEnNo.requestFocus();
                     } else {
                         if (isOnline()) {
 

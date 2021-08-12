@@ -162,24 +162,87 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/ll_mainsub_root"
+                android:id="@+id/ll_radiotype"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/breathAn"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:orientation="horizontal"
+                android:visibility="visible">
+
+                <RadioGroup
+                    android:id="@+id/radioGrp_regNo_EngnNo_Chasis"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/radioGroupButton_regNo"
+                        style="@style/dd_custom_radio_btn_style_isDriver_isOwner"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="true"
+                        android:paddingStart="@dimen/header_grnt_padding_ten"
+                        android:paddingEnd="@dimen/header_grnt_padding_ten"
+                        android:text="@string/regNo" />
+
+                    <RadioButton
+                        android:id="@+id/radioGroupButton_engineNo"
+                        style="@style/dd_custom_radio_btn_style_isDriver_isOwner"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingStart="@dimen/header_grnt_padding_ten"
+                        android:paddingEnd="@dimen/header_grnt_padding_ten"
+                        android:text="@string/engine"
+                        android:visibility="visible" />
+
+                    <RadioButton
+                        android:id="@+id/radioGroupButton_chasisNo"
+                        style="@style/dd_custom_radio_btn_style_isDriver_isOwner"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingStart="@dimen/header_grnt_padding_ten"
+                        android:paddingEnd="@dimen/header_grnt_padding_ten"
+                        android:text="@string/chasis"
+                        android:visibility="visible" />
+
+                    <RadioButton
+                        android:id="@+id/radioGroupButton_TrNo"
+                        style="@style/dd_custom_radio_btn_style_isDriver_isOwner"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingStart="@dimen/header_grnt_padding_ten"
+                        android:paddingEnd="@dimen/header_grnt_padding_ten"
+                        android:text="TR No"
+                        android:visibility="visible" />
+                </RadioGroup>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_mainsub_root"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/ll_radiotype"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="@dimen/_10sdp">
+                android:layout_marginTop="@dimen/_3sdp"
+                android:orientation="horizontal"
+                android:weightSum="3">
 
                 <TextView
                     android:id="@+id/textView12"
                     style="@style/navi_text_style"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:text="Regn No                   " />
+                    android:text="Regn No"
+                    android:layout_weight="0.8"/>
 
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2.2">
 
                     <EditText
                         android:id="@+id/edt_regncid_rtadetails_xml"
@@ -224,10 +287,40 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/ll_owner_challans"
+                android:id="@+id/lyt_RegTRCsEnNo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/ll_mainsub_root"
+                android:layout_marginTop="@dimen/header_grnt_padding_ten"
+                android:weightSum="3"
+                android:visibility="gone">
+
+                <TextView
+                    android:id="@+id/tv_RegTRCsEnNo"
+                    style="@style/navi_text_style"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="0.8"
+                    android:text="@string/regNo" />
+
+                <EditText
+                    android:id="@+id/et_RegTRCsEnNo"
+                    style="@style/edt_custom_style"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2.2"
+                    android:digits="0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+                    android:gravity="center"
+                    android:inputType="text|textCapCharacters"
+                    android:maxLength="25"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_owner_challans"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/lyt_RegTRCsEnNo"
                 android:layout_marginTop="@dimen/header_grnt_padding_ten">
 
                 <RadioGroup
@@ -282,22 +375,24 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/ll_owner_challans"
-                android:layout_marginTop="@dimen/header_grnt_padding_ten">
+                android:layout_marginTop="@dimen/header_grnt_padding_ten"
+                android:weightSum="3">
 
                 <TextView
                     android:id="@+id/textView4"
                     style="@style/navi_text_style"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:text="@string/driver_lcnce_no" />
+                    android:text="@string/driver_lcnce_no"
+                    android:layout_weight="0.8"/>
 
                 <EditText
                     android:id="@+id/edt_driverdlno_rtadetails_xml"
                     style="@style/edt_custom_style"
-                    android:layout_width="80dp"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    android:layout_weight="2.2"
                     android:digits="-0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ/."
                     android:gravity="center"
                     android:inputType="text|textCapCharacters"

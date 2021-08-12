@@ -219,15 +219,15 @@ public class Drunk_Drive extends AppCompatActivity implements OnClickListener, L
 
     public static RadioGroup radioGrp_regNo_EngnNo_Chasis;
 
-    public static RadioButton radioGroupButton_regNo, radioGroupButton_engineNo, radioGroupButton_chasisNo;
+    public static RadioButton radioGroupButton_regNo, radioGroupButton_engineNo, radioGroupButton_chasisNo, radioGroupButton_TrNo;
 
-    public static LinearLayout ll_mainsub_root, ll_engineNo, ll_chasisNo, ll_regno;
+    public static LinearLayout ll_mainsub_root, ll_engineNo, ll_chasisNo, ll_regno, lyt_RegTRCsEnNo;
 
     public static EditText et_engineNo, et_chasisNo;
 
     public static String RegNo_EngNo_ChasisNo = "";
 
-    public static boolean EngneFLG = false, regNoFLG = false, chasisFLG = false, veh_HisFLG = false;
+    public static boolean EngneFLG = false, regNoFLG = true, chasisFLG = false, veh_HisFLG = false;
 
     public static int isitTr = 1;
 
@@ -296,6 +296,9 @@ public class Drunk_Drive extends AppCompatActivity implements OnClickListener, L
     Button btn_vehCategory;
     DatePickerFragmentDialog datePickerDialog;
     public static String bt_ID = "", calbrition_Date = "";
+    TextView tv_RegTRCsEnNo;
+    EditText et_RegTRCsEnNo;
+    String isVehicleInfoKey = "R";
 
     @SuppressLint({"NewApi", "MissingPermission", "ObsoleteSdkInt", "SimpleDateFormat"})
     @Override
@@ -517,6 +520,9 @@ public class Drunk_Drive extends AppCompatActivity implements OnClickListener, L
     }
 
     private void LoadUIComponents() {
+        regNoFLG = true;
+        EngneFLG = false;
+        chasisFLG = false;
 
         et_regcid = (EditText) findViewById(R.id.edt_regncid_rtadetails_xml);
         et_vchl_num = (EditText) findViewById(R.id.edt_regncidname_rtadetails_xml);
@@ -529,6 +535,99 @@ public class Drunk_Drive extends AppCompatActivity implements OnClickListener, L
         offender_image = (ImageView) findViewById(R.id.offender_image);
         offender_image.setVisibility(View.GONE);
         et_regcid.requestFocus();
+        radioGrp_regNo_EngnNo_Chasis = (RadioGroup) findViewById(R.id.radioGrp_regNo_EngnNo_Chasis);
+        radioGroupButton_regNo = (RadioButton) findViewById(R.id.radioGroupButton_regNo);
+        radioGroupButton_engineNo = (RadioButton) findViewById(R.id.radioGroupButton_engineNo);
+        radioGroupButton_chasisNo = (RadioButton) findViewById(R.id.radioGroupButton_chasisNo);
+        radioGroupButton_TrNo = findViewById(R.id.radioGroupButton_TrNo);
+        lyt_RegTRCsEnNo = findViewById(R.id.lyt_RegTRCsEnNo);
+        tv_RegTRCsEnNo = findViewById(R.id.tv_RegTRCsEnNo);
+        et_RegTRCsEnNo = findViewById(R.id.et_RegTRCsEnNo);
+
+        radioGrp_regNo_EngnNo_Chasis.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+
+            @SuppressLint("SetTextI18n")
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+
+                // TODO Auto-generated method stub
+                if (checkedId == R.id.radioGroupButton_regNo) {
+
+                    regNoFLG = true;
+                    EngneFLG = false;
+                    chasisFLG = false;
+                    isitTr = 1;
+                    isVehicleInfoKey = "R";//REG
+                    tv_RegTRCsEnNo.setText("Registration No");
+                    et_RegTRCsEnNo.setText("");
+                    ll_mainsub_root.setVisibility(View.VISIBLE);
+                    lyt_RegTRCsEnNo.setVisibility(View.GONE);
+                    lyt_DD_Details.setVisibility(View.GONE);
+                    et_regcid.setText("");
+                    et_vchl_num.setText("");
+                    et_last_num.setText("");
+                    et_regcid.requestFocus();
+                    et_driver_lcnce_num.setText("");
+                    btn_wheler_code.setText("" + getString(R.string.select_wheeler_code));
+
+                } else if (checkedId == R.id.radioGroupButton_engineNo) {
+
+                    EngneFLG = true;
+                    regNoFLG = false;
+                    chasisFLG = false;
+                    isitTr = 2;
+                    isVehicleInfoKey = "E";//ENG JF50ET7027745
+                    tv_RegTRCsEnNo.setText("Engine No");
+                    et_RegTRCsEnNo.setText("");
+                    ll_mainsub_root.setVisibility(View.GONE);
+                    lyt_RegTRCsEnNo.setVisibility(View.VISIBLE);
+                    lyt_DD_Details.setVisibility(View.GONE);
+                    et_regcid.setText("");
+                    et_vchl_num.setText("");
+                    et_last_num.setText("");
+                    et_regcid.requestFocus();
+                    et_driver_lcnce_num.setText("");
+                    btn_wheler_code.setText("" + getString(R.string.select_wheeler_code));
+
+                } else if (checkedId == R.id.radioGroupButton_chasisNo) {
+                    chasisFLG = true;
+                    EngneFLG = false;
+                    regNoFLG = false;
+                    isitTr = 3;
+                    isVehicleInfoKey = "C";//CHASSIS ME4JF50ACJT027716
+                    tv_RegTRCsEnNo.setText("Chassis No");
+                    et_RegTRCsEnNo.setText("");
+                    ll_mainsub_root.setVisibility(View.GONE);
+                    lyt_RegTRCsEnNo.setVisibility(View.VISIBLE);
+                    lyt_DD_Details.setVisibility(View.GONE);
+                    et_regcid.setText("");
+                    et_vchl_num.setText("");
+                    et_last_num.setText("");
+                    et_regcid.requestFocus();
+                    et_driver_lcnce_num.setText("");
+                    btn_wheler_code.setText("" + getString(R.string.select_wheeler_code));
+
+                } else if (checkedId == R.id.radioGroupButton_TrNo) {
+                    chasisFLG = true;
+                    EngneFLG = false;
+                    regNoFLG = false;
+                    isitTr = 4;
+                    isVehicleInfoKey = "T";
+                    tv_RegTRCsEnNo.setText("TR No");
+                    et_RegTRCsEnNo.setText("");
+                    ll_mainsub_root.setVisibility(View.GONE);
+                    lyt_RegTRCsEnNo.setVisibility(View.VISIBLE);
+                    lyt_DD_Details.setVisibility(View.GONE);
+                    et_regcid.setText("");
+                    et_vchl_num.setText("");
+                    et_last_num.setText("");
+                    et_regcid.requestFocus();
+                    et_driver_lcnce_num.setText("");
+                    btn_wheler_code.setText("" + getString(R.string.select_wheeler_code));
+
+                }
+            }
+        });
 
         et_regcid.addTextChangedListener(new TextWatcher() {
 
@@ -538,6 +637,7 @@ public class Drunk_Drive extends AppCompatActivity implements OnClickListener, L
                 if (et_regcid.getText().toString().length() == edt_regncid_spotchallanMAX_LENGTH) {
                     et_vchl_num.requestFocus();
                 }
+                lyt_DD_Details.setVisibility(View.GONE);
             }
 
             @Override
@@ -558,6 +658,7 @@ public class Drunk_Drive extends AppCompatActivity implements OnClickListener, L
                 if (et_vchl_num.getText().toString().length() == edt_regncidname_spotchallanLENGTH) {
                     et_last_num.requestFocus();
                 }
+                lyt_DD_Details.setVisibility(View.GONE);
             }
 
             @Override
@@ -578,11 +679,28 @@ public class Drunk_Drive extends AppCompatActivity implements OnClickListener, L
                 if (et_last_num.getText().toString().length() == edt_regncid_lastnum_spotchallanMAX_LENGTH) {
                     et_driver_lcnce_num.requestFocus();
                 }
+                lyt_DD_Details.setVisibility(View.GONE);
             }
 
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+        et_RegTRCsEnNo.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                lyt_DD_Details.setVisibility(View.GONE);
             }
 
             @Override
@@ -912,8 +1030,8 @@ public class Drunk_Drive extends AppCompatActivity implements OnClickListener, L
 
                 String dateofbirthbut = dob_input.getText().toString();
 
-                if ("0000".equalsIgnoreCase(et_vchl_num.getText().toString().trim()) ||
-                        "0000".equalsIgnoreCase(et_last_num.getText().toString().trim())) {
+                if (("0000".equalsIgnoreCase(et_vchl_num.getText().toString().trim()) ||
+                        "0000".equalsIgnoreCase(et_last_num.getText().toString().trim()))&& regNoFLG) {
                     showToast("   Please enter valid Registration No !   ");
 
                 } else {
@@ -945,19 +1063,20 @@ public class Drunk_Drive extends AppCompatActivity implements OnClickListener, L
 
             case R.id.btn_pendingchallans_rtadetails_xml:
 
-                if (et_regcid.getText().toString().trim().equals("")) {
+                if (et_regcid.getText().toString().trim().equals("")&& regNoFLG) {
                     // utils.showError(et_regcid, "Enter Registration Code");
                     et_regcid.setError(Html.fromHtml("<font color='black'>Enter Registration Code</font>"));
-
                 }
-                // NOT MANDATORY
-                // else if (et_vchl_num.getText().toString().trim().equals("")) {
-                // utils.showError(et_vchl_num, "Enter Registration Series");
-                // }
-                else if (et_last_num.getText().toString().trim().equals("")) {
+                else if (et_last_num.getText().toString().trim().equals("")&& regNoFLG) {
                     // utils.showError(et_last_num, "Enter Vehicle Number");
                     et_last_num.setError(Html.fromHtml("<font color='black'>Enter Vehicle Number</font>"));
-                } else {
+                } else if (et_RegTRCsEnNo.getText().toString().trim().isEmpty() && !regNoFLG) {
+                    et_RegTRCsEnNo.setError(Html.fromHtml("<font color='white'>Please enter the value</font>"));
+                    et_RegTRCsEnNo.requestFocus();
+                } else if (et_RegTRCsEnNo.getText().toString().trim().startsWith("0") && !regNoFLG) {
+                    et_RegTRCsEnNo.setError(Html.fromHtml("<font color='white'>Please enter valid number</font>"));
+                    et_RegTRCsEnNo.requestFocus();
+                }else {
                     if (isOnline()) {
                         vehicle_num_send = "";
                         vehicle_num_send = ("" + (et_regcid.getText().toString().trim().toUpperCase()) + ""
@@ -986,12 +1105,19 @@ public class Drunk_Drive extends AppCompatActivity implements OnClickListener, L
             case R.id.btngeneratechallan_rta_details_xml:
 
 
-                if (et_regcid.getText().toString().trim().equals("")) {
+                if (et_regcid.getText().toString().trim().equals("")&& regNoFLG) {
+                    // utils.showError(et_regcid, "Enter Registration Code");
                     et_regcid.setError(Html.fromHtml("<font color='black'>Enter Registration Code</font>"));
-                    et_regcid.requestFocus();
-                } else if (et_last_num.getText().toString().trim().equals("")) {
+                }
+                else if (et_last_num.getText().toString().trim().equals("")&& regNoFLG) {
                     // utils.showError(et_last_num, "Enter Vehicle Number");
                     et_last_num.setError(Html.fromHtml("<font color='black'>Enter Vehicle Number</font>"));
+                } else if (et_RegTRCsEnNo.getText().toString().trim().isEmpty() && !regNoFLG) {
+                    et_RegTRCsEnNo.setError(Html.fromHtml("<font color='white'>Please enter the value</font>"));
+                    et_RegTRCsEnNo.requestFocus();
+                } else if (et_RegTRCsEnNo.getText().toString().trim().startsWith("0") && !regNoFLG) {
+                    et_RegTRCsEnNo.setError(Html.fromHtml("<font color='white'>Please enter valid number</font>"));
+                    et_RegTRCsEnNo.requestFocus();
                 } else if (btn_wheler_code.getText().toString().trim()
                         .equals("" + getResources().getString(R.string.select_wheeler_code))) {
                     showToast("Select wheeler code");
@@ -1201,16 +1327,21 @@ public class Drunk_Drive extends AppCompatActivity implements OnClickListener, L
 
             VerhoeffCheckDigit ver = new VerhoeffCheckDigit();
 
-            if (et_regcid.getText().toString().trim().equals("")) {
-                // utils.showError(et_regcid, "Enter Registration Code");
+            if (et_regcid.getText().toString().trim().equals("") && regNoFLG) {
                 et_regcid.setError(Html.fromHtml("<font color='white'>Enter Registration Code</font>"));
                 et_regcid.requestFocus();
 
-            } else if (et_last_num.getText().toString().trim().equals("")) {
+            } else if (et_last_num.getText().toString().trim().equals("") && regNoFLG) {
                 // utils.showError(et_last_num, "");
                 et_last_num.setError(Html.fromHtml("<font color='white'>Enter Vehicle Number</font>"));
                 et_last_num.requestFocus();
 
+            } else if (et_RegTRCsEnNo.getText().toString().trim().isEmpty() && !regNoFLG) {
+                et_RegTRCsEnNo.setError(Html.fromHtml("<font color='white'>Please enter the value</font>"));
+                et_RegTRCsEnNo.requestFocus();
+            } else if (et_RegTRCsEnNo.getText().toString().trim().startsWith("0") && !regNoFLG) {
+                et_RegTRCsEnNo.setError(Html.fromHtml("<font color='white'>Please enter valid number</font>"));
+                et_RegTRCsEnNo.requestFocus();
             } else if (edt_checkslno_.getText().toString().trim().isEmpty()) {
                 edt_checkslno_.setError(Html.fromHtml("<font color='white'>Enter Check serial Number !</font>"));
                 edt_checkslno_.requestFocus();
@@ -1581,10 +1712,14 @@ public class Drunk_Drive extends AppCompatActivity implements OnClickListener, L
 
             aadhaar = et_aadharnumber.getText().toString().trim();
             licence_no = et_driver_lcnce_num.getText().toString().trim();
+            if (regNoFLG) {
+                completeVehicle_num_send = ("" + regncode_send + "" + regnName_send + "" + vehicle_num_send);
+            } else {
+                completeVehicle_num_send = et_RegTRCsEnNo.getText().toString().trim();
+            }
 
-            completeVehicle_num_send = ("" + regncode_send + "" + regnName_send + "" + vehicle_num_send);
-
-            ServiceHelper.getRTADetails("" + completeVehicle_num_send);
+            // ServiceHelper.getRTADetails("" + completeVehicle_num_send);
+            ServiceHelper.getVehicleDetailsByany(isVehicleInfoKey, "" + completeVehicle_num_send);
             return null;
         }
 
@@ -1596,6 +1731,7 @@ public class Drunk_Drive extends AppCompatActivity implements OnClickListener, L
             showDialog(PROGRESS_DIALOG);
         }
 
+        @SuppressLint("SetTextI18n")
         @SuppressWarnings("deprecation")
         @Override
         protected void onPostExecute(String result) {
@@ -1616,6 +1752,7 @@ public class Drunk_Drive extends AppCompatActivity implements OnClickListener, L
                         licFLG = false;
                         adhrFLG = false;
                         try {
+                            completeVehicle_num_send = "" + rta_details_master[24] != null ? rta_details_master[24] : "NA";
                             tv_vhle_no.setText("" + completeVehicle_num_send);
                             tv_owner_name.setText("" + rta_details_master[1] != null ? rta_details_master[1] : "");
                             tv_address.setText("" + rta_details_master[2] != null ? rta_details_master[2] : "" + "\t" + rta_details_master[3] != null ? rta_details_master[3] : "");

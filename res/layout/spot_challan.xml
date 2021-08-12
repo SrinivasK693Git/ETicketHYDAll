@@ -415,7 +415,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/ll_chasisNo"
-                android:layout_marginTop="@dimen/header_grnt_padding_ten">
+                android:layout_marginTop="@dimen/header_grnt_padding_ten"
+                android:weightSum="3">
 
                 <TextView
                     android:id="@+id/textView4"

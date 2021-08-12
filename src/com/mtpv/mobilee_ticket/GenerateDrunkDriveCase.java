@@ -1450,8 +1450,7 @@ public class GenerateDrunkDriveCase extends Activity implements OnClickListener,
 
             otp_status = "send";
 
-            String completeVehicle_num_send = et_regn_cid.getText().toString().trim()
-                    + et_regn_cid_name.getText().toString().trim() + et_regn_last_num.getText().toString().trim();
+            String completeVehicle_num_send = Drunk_Drive.completeVehicle_num_send;
 
            /* ServiceHelper.sendOTPtoMobile(completeVehicle_num_send, et_driver_contact_no.getText().toString().trim(),
                     "" + btn_offence_date.getText().toString().toUpperCase(), ""+smsMode);*/
@@ -1489,8 +1488,7 @@ public class GenerateDrunkDriveCase extends Activity implements OnClickListener,
 
                     Intent dialogbox = new Intent(getApplicationContext(), OTP_input.class);
                     dialogbox.putExtra("regNO",
-                            "" + et_regn_cid.getText().toString().trim() + et_regn_cid_name.getText().toString().trim()
-                                    + et_regn_last_num.getText().toString().trim());
+                            "" + Drunk_Drive.completeVehicle_num_send);
                     dialogbox.putExtra("MobileNo", et_driver_contact_no.getText().toString().trim());
                     dialogbox.putExtra("otp_date", "" + btn_offence_date.getText().toString().toUpperCase());
                     dialogbox.putExtra("OTP_value", otpValue);
@@ -1767,7 +1765,7 @@ public class GenerateDrunkDriveCase extends Activity implements OnClickListener,
             case ERROR_DIALOG:
 
                 TextView title2 = new TextView(this);
-                title2.setText("Hyderabad \n E-Ticket");
+                title2.setText("Hyderabad  E-Ticket");
                 title2.setBackgroundColor(Color.RED);
                 title2.setGravity(Gravity.CENTER);
                 title2.setTextColor(Color.WHITE);
@@ -2521,8 +2519,7 @@ public class GenerateDrunkDriveCase extends Activity implements OnClickListener,
         @Override
         protected String doInBackground(Void... params) {
             // TODO Auto-generated method stub
-            String regNo = et_regn_cid.getText().toString().trim() + "" + et_regn_cid_name.getText().toString().trim() + ""
-                    + et_regn_last_num.getText().toString().trim();
+            String regNo = Drunk_Drive.completeVehicle_num_send;
             SharedPreferences sharedPreference = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
             String pidCd = sharedPreference.getString("PID_CODE", "");
             ServiceHelper.checkSameChallan(regNo, btn_offence_date.getText().toString().trim().toUpperCase(),
@@ -2564,8 +2561,7 @@ public class GenerateDrunkDriveCase extends Activity implements OnClickListener,
         protected String doInBackground(Void... params) {
             // TODO Auto-generated method stub
             //getSimImeiNo();
-            String regNo = et_regn_cid.getText().toString().trim() + "" + et_regn_cid_name.getText().toString().trim() + ""
-                    + et_regn_last_num.getText().toString().trim();
+            String regNo = Drunk_Drive.completeVehicle_num_send;
             SharedPreferences sharedPreference2 = PreferenceManager
                     .getDefaultSharedPreferences(getApplicationContext());
             String psCd = sharedPreference2.getString("PS_CODE", "");
@@ -2692,8 +2688,7 @@ public class GenerateDrunkDriveCase extends Activity implements OnClickListener,
                 ServiceHelper.generateDrunDriveCase_1_5_2(
                         "" + "" + et_regn_cid.getText().toString() + "" + et_regn_cid_name.getText().toString(),
                         "" + et_regn_last_num.getText().toString(),
-                        "" + et_regn_cid.getText().toString() + "" + et_regn_cid_name.getText().toString() + ""
-                                + et_regn_last_num.getText().toString(),
+                        "" + Drunk_Drive.completeVehicle_num_send,
                         pidCd, // operator code or pid code
                         pidName, // operator name or pid name
                         pidCd, // operator code or pid code
