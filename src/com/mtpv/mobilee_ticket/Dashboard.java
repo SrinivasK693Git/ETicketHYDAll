@@ -335,7 +335,7 @@ public class Dashboard extends Activity implements OnClickListener {
 
     private void showModuleAuthDlg() {
         TextView title = new TextView(this);
-        title.setText("Hyderabad E-Ticket");
+        title.setText("Telangana E-Ticket");
         title.setBackgroundColor(Color.RED);
         title.setGravity(Gravity.CENTER);
         title.setTextColor(Color.WHITE);

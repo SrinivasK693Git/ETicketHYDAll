@@ -645,6 +645,9 @@ public class MainActivity extends Activity implements OnClickListener, LocationL
                     } else if (ServiceHelper.Opdata_Chalana.trim().equals("5")) {
                         showToast(
                                 "You have Exceeded Number of \n Attempts with Wrong Password,\n Please Contact E Challan Team at 040-27852721 ");
+                    } else if (ServiceHelper.Opdata_Chalana.trim().equals("6")) {
+                        showToast(
+                                "Unauthorized User \n Please Contact E Challan Team at 040-27852721 ");
                     } else if (ServiceHelper.Opdata_Chalana.trim().equals("0")) {
                         showToast("Please Check Your Network And Try Again");
                     } else {

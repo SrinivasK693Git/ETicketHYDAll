@@ -636,7 +636,7 @@ public class GenerateDrunkDriveCase extends Activity implements OnClickListener,
 
     }
 
-    @SuppressLint({"DefaultLocale", "SimpleDateFormat"})
+    @SuppressLint({"DefaultLocale", "SimpleDateFormat", "SetTextI18n"})
     private void LoadUIComponents() {
         // TODO Auto-generated method stub
         netwrk_info_txt = "" + getResources().getString(R.string.newtork_txt);

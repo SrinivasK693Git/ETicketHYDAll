@@ -91,6 +91,7 @@ public class ServiceHelper {
             request.addProperty("gpsLattitude", lat);
             request.addProperty("gpsLongitude", log);
             request.addProperty("appVersion", appVersion);
+            request.addProperty("appName", "TSeTicketMobile");
             SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
             envelope.dotNet = true;
             envelope.setOutputSoapObject(request);
